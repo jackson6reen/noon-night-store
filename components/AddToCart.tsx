@@ -1,51 +1,53 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
-import type { Product } from "@/lib/products";
+import type { Card } from "@/lib/site";
 
-export function AddToCart({
-  product,
-  withQty = false,
-  label = "Add to cart",
-  className = "",
-}: {
-  product: Pick<Product, "slug" | "sku" | "name" | "price" | "line" | "inStock">;
-  withQty?: boolean;
-  label?: string;
-  className?: string;
-}) {
+type Item = Pick<Card, "slug" | "sku" | "name" | "price" | "accent">;
+
+export function AddToCartButton({ product, className = "", label = "Add to cart" }: { product: Item; className?: string; label?: string }) {
+  const { add } = useCart();
+  return (
+    <button type="button" className={className} aria-label={`Add to cart: “${product.name}”`}
+      onClick={() => add({ slug: product.slug, sku: product.sku, name: product.name, price: product.price, line: product.accent })}>
+      {label}
+    </button>
+  );
+}
+
+/** Product-page form: quantity + add to cart, plus a mobile sticky bar while the button is off-screen. */
+export function AddToCartForm({ product, priceLabel }: { product: Item; priceLabel: string }) {
   const { add } = useCart();
   const [qty, setQty] = useState(1);
+  const [sticky, setSticky] = useState(false);
+  const btn = useRef<HTMLButtonElement>(null);
 
-  if (!product.inStock)
-    return (
-      <button disabled className={`btn btn-muted ${className}`}>
-        Sold out
-      </button>
-    );
+  useEffect(() => {
+    if (!btn.current || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(([e]) => setSticky(!e.isIntersecting && e.boundingClientRect.top < 0));
+    io.observe(btn.current);
+    return () => io.disconnect();
+  }, []);
+
+  const submit = () => add({ slug: product.slug, sku: product.sku, name: product.name, price: product.price, line: product.accent }, qty);
 
   return (
-    <div className={`flex items-stretch gap-3 ${className}`}>
-      {withQty && (
-        <div className="flex items-center rounded-full border border-ink/15 bg-white">
-          <button aria-label="Decrease quantity" className="px-4 py-3 text-lg" onClick={() => setQty((q) => Math.max(1, q - 1))}>
-            −
-          </button>
-          <span className="w-6 text-center tabular-nums" aria-live="polite">{qty}</span>
-          <button aria-label="Increase quantity" className="px-4 py-3 text-lg" onClick={() => setQty((q) => q + 1)}>
-            +
-          </button>
+    <>
+      <form className="cart" onSubmit={(e) => { e.preventDefault(); submit(); }}>
+        <div className="quantity">
+          <label className="screen-reader-text" htmlFor="nn-qty">Quantity</label>
+          <input id="nn-qty" type="number" min={1} max={99} value={qty} onChange={(e) => setQty(Math.max(1, Math.min(99, Number(e.target.value) || 1)))} />
+        </div>
+        <button ref={btn} type="submit" className="single_add_to_cart_button button alt">Add to cart</button>
+      </form>
+      {sticky && (
+        <div className="nn-sticky-atc">
+          <span className="nn-sticky-atc__name">{product.name}</span>
+          <span className="nn-sticky-atc__price">{priceLabel}</span>
+          <button type="button" className="nn-btn" onClick={submit}>Add to cart</button>
         </div>
       )}
-      <button
-        className={`btn ${product.line === "noon" ? "btn-sun" : "btn-night"} flex-1`}
-        onClick={() =>
-          add({ slug: product.slug, sku: product.sku, name: product.name, price: product.price, line: product.line }, qty)
-        }
-      >
-        {label}
-      </button>
-    </div>
+    </>
   );
 }

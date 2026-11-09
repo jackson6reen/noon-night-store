@@ -25,6 +25,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(false);
 
+  // The saved cart lives in localStorage, which only exists after mount.
+  /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
     try {
       const raw = localStorage.getItem(KEY);
@@ -32,6 +34,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {}
     setReady(true);
   }, []);
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   useEffect(() => {
     if (!ready) return;

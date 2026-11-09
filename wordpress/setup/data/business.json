@@ -1,0 +1,14 @@
+{
+  "_readme": "Business details for the Vercel preview. On WordPress these come from Settings > Noon Night (same keys). Keep both in sync.",
+  "business_name": "Noon Night",
+  "legal_entity": "[LEGAL ENTITY NAME, e.g. Noon Night LLC]",
+  "address": "[BUSINESS MAILING ADDRESS]",
+  "support_email": "support@example.com",
+  "phone": "",
+  "state_of_law": "[STATE, e.g. Delaware]",
+  "free_ship_min": 50,
+  "flat_shipping": 5.95,
+  "guarantee_days": 30,
+  "announcement": "Free US shipping over $50 · 30-day money-back guarantee",
+  "policy_updated": "2026-11-09"
+}

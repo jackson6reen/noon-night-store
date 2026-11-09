@@ -1,40 +1,62 @@
 import Link from "next/link";
-import { FDA_DISCLAIMER } from "@/lib/products";
-import { Logo } from "./Header";
+import { FDA_DISCLAIMER, getBusiness, getConcerns } from "@/lib/site";
+import { Icon } from "./Icon";
+import { PrivacyChoicesLink } from "./ConsentBanner";
+
+type L = { label: string; href: string };
 
 export function Footer() {
+  const b = getBusiness();
+  const shop: L[] = [{ label: "Shop all", href: "/shop" }, ...getConcerns(true).map((c) => ({ label: c.name, href: `/product-category/${c.slug}` }))];
+  const help: L[] = [
+    { label: "Our Story", href: "/about" },
+    { label: "FAQ", href: "/faq" },
+    { label: "Contact", href: "/contact" },
+    { label: "Shipping", href: "/shipping-policy" },
+    { label: "Refunds & Guarantee", href: "/refund-policy" },
+  ];
+  const legal: L[] = [
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Medical Disclaimer", href: "/medical-disclaimer" },
+    { label: "Accessibility", href: "/accessibility" },
+  ];
+  const col = (title: string, items: L[]) => (
+    <nav className="nn-footer__col" aria-label={title}>
+      <p className="nn-footer__title">{title}</p>
+      <ul>{items.map((i) => <li key={i.href}><Link href={i.href}>{i.label}</Link></li>)}</ul>
+    </nav>
+  );
+
   return (
-    <footer className="mt-24 bg-night text-cream">
-      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 sm:grid-cols-3">
-        <div>
-          <Logo light />
-          <p className="mt-4 max-w-xs text-sm text-cream/70">
-            Supplements for the two hardest parts of the day: the bloated afternoon and the restless night.
-          </p>
+    <>
+      <section className="nn-trust-strip" aria-label="Why shop with us">
+        <div className="nn-container nn-trust-strip__grid">
+          <p><Icon name="shield" /> <span>{b.guarantee_days}-day money-back guarantee</span></p>
+          <p><Icon name="truck" /> <span>Free US shipping over ${b.free_ship_min}</span></p>
+          <p><Icon name="flask" /> <span>Made in the USA, cGMP facility</span></p>
+          <p><Icon name="heart" /> <span>Real people answer support emails</span></p>
         </div>
-        <div className="text-sm">
-          <h3 className="mb-3 font-semibold">Shop</h3>
-          <ul className="space-y-2 text-cream/75">
-            <li><Link href="/shop?line=noon" className="hover:text-sun">Noon line (day)</Link></li>
-            <li><Link href="/shop?line=night" className="hover:text-sun">Night line (sleep)</Link></li>
-            <li><Link href="/reset" className="hover:text-sun">The 24-Hour Reset</Link></li>
-          </ul>
+      </section>
+      <footer className="nn-footer">
+        <div className="nn-container">
+          <div className="nn-footer__grid">
+            <div className="nn-footer__brand">
+              <p className="nn-footer__logo">Noon Night</p>
+              <p>Gentle, clean supplements for sleep, period comfort and bloating. Made for women who are done just pushing through.</p>
+              <p><a href={`mailto:${b.support_email}`}>{b.support_email}</a></p>
+            </div>
+            {col("Shop", shop)}
+            {col("Help", help)}
+            {col("Legal", legal)}
+          </div>
+          <p className="nn-fda nn-footer__fda">{FDA_DISCLAIMER}</p>
+          <div className="nn-footer__bottom">
+            <p>© 2026 {String(b.legal_entity)}. All rights reserved.</p>
+            <p><PrivacyChoicesLink /></p>
+          </div>
         </div>
-        <div className="text-sm">
-          <h3 className="mb-3 font-semibold">Promise</h3>
-          <ul className="space-y-2 text-cream/75">
-            <li>Made in FDA-registered, cGMP facilities</li>
-            <li>Ships from the U.S.</li>
-            <li>30-Night Rest-Easy Guarantee</li>
-          </ul>
-        </div>
-      </div>
-      <div className="border-t border-cream/10">
-        <p className="mx-auto max-w-6xl px-4 py-6 text-xs leading-relaxed text-cream/55">
-          {FDA_DISCLAIMER} Talk to your doctor before starting any supplement, especially if you are pregnant, nursing, taking medication, or have a medical condition.
-          <br />© 2026 Noon Night.
-        </p>
-      </div>
-    </footer>
+      </footer>
+    </>
   );
 }
