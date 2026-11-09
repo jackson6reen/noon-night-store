@@ -1,5 +1,9 @@
 # Noon Night: supplement store
 
+> **Production store = WordPress + WooCommerce.** Theme, plugin, catalog, SEO content and the seeder are in [`wordpress/`](wordpress/README.md).
+> Launch steps: [`docs/LAUNCH-CHECKLIST.md`](docs/LAUNCH-CHECKLIST.md) · Security: [`docs/WORDPRESS-SECURITY.md`](docs/WORDPRESS-SECURITY.md).
+> The Next.js app below is the earlier prototype (still deployed on Vercel).
+
 Day-and-night supplements for U.S. customers dealing with gas/bloating and poor sleep.
 **Noon line** (digestion, daytime) · **Night line** (sleep, recovery) · **The 24-Hour Reset** kit.
 

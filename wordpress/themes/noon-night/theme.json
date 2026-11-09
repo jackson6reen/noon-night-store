@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 3,
+	"settings": {
+		"appearanceTools": true,
+		"layout": { "contentSize": "720px", "wideSize": "1200px" },
+		"color": {
+			"defaultPalette": false,
+			"palette": [
+				{ "slug": "night", "name": "Night plum", "color": "#3B2A5A" },
+				{ "slug": "ink", "name": "Ink", "color": "#231B33" },
+				{ "slug": "peach", "name": "Peach", "color": "#F4C2AE" },
+				{ "slug": "coral", "name": "Coral (accent)", "color": "#C2563A" },
+				{ "slug": "lilac", "name": "Lilac", "color": "#E7DFF3" },
+				{ "slug": "sage", "name": "Sage", "color": "#DCE8D6" },
+				{ "slug": "cream", "name": "Cream", "color": "#FBF7F2" },
+				{ "slug": "white", "name": "White", "color": "#FFFFFF" }
+			]
+		},
+		"typography": {
+			"fontFamilies": [
+				{ "slug": "display", "name": "Display (Fraunces)", "fontFamily": "\"Fraunces\", Georgia, serif" },
+				{ "slug": "body", "name": "Body (Inter)", "fontFamily": "\"Inter\", system-ui, -apple-system, \"Segoe UI\", Roboto, sans-serif" }
+			]
+		}
+	},
+	"styles": {
+		"color": { "background": "var(--wp--preset--color--cream)", "text": "var(--wp--preset--color--ink)" },
+		"typography": { "fontFamily": "var(--wp--preset--font-family--body)", "lineHeight": "1.65" },
+		"elements": {
+			"heading": { "typography": { "fontFamily": "var(--wp--preset--font-family--display)", "lineHeight": "1.15" } },
+			"link": { "color": { "text": "var(--wp--preset--color--night)" } }
+		}
+	}
+}

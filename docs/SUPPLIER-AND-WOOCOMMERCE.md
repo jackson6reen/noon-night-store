@@ -1,5 +1,9 @@
 # White-label dropshipping + WooCommerce setup
 
+> **Update 2026-11-09:** the catalog moved to `wordpress/setup/data/products.json`.
+> Confirmed in Supliful's public catalog: Probiotic 40 Billion with Prebiotics, Digestive Enzyme Pro Blend, L-Glutamine, Women's Vitality Formula (chasteberry/black cohosh/dong quai), Ashwagandha. Not yet confirmed: magnesium glycinate, sleep formula.
+> Supliful's site advertises Shopify and ClickFunnels sync only, so **confirm WooCommerce support before paying**. Options are in `docs/LAUNCH-CHECKLIST.md` §1.
+
 ## 1. Supplier: recommended start
 
 **Supliful** (supliful.com): white-label supplements with your own label, **no minimum order**, made in FDA-registered, cGMP facilities, and shipped from the U.S. per order, so you don't hold stock. Plans have been listed at roughly $29–$69/month. Check current pricing and confirm the **WooCommerce** connection directly with them: review sites say they connect to WooCommerce, but their main app is Shopify-first. If the WooCommerce connection isn't available on your plan, their help center describes an API option for other storefronts.

@@ -1,0 +1,20 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/",
+	"preferredVersions": { "php": "8.2", "wp": "latest" },
+	"features": { "networking": true },
+	"login": true,
+	"steps": [
+		{
+			"step": "installPlugin",
+			"pluginData": { "resource": "wordpress.org/plugins", "slug": "woocommerce" },
+			"options": { "activate": true }
+		},
+		{ "step": "activatePlugin", "pluginPath": "noon-night-core/noon-night-core.php" },
+		{ "step": "activateTheme", "themeFolderName": "noon-night" },
+		{
+			"step": "runPHP",
+			"code": "<?php require '/wordpress/wp-load.php'; update_option('woocommerce_coming_soon','no'); update_option('woocommerce_store_pages_only','no'); update_option('woocommerce_onboarding_profile', array('skipped' => true)); define('NN_SEED_FRESH_SITE', true); require '/wordpress/nn-setup/seed.php';"
+		}
+	]
+}
