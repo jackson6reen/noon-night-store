@@ -1,7 +1,7 @@
 # Evenly for WordPress + WooCommerce
 
 This folder is the production store: a **WooCommerce theme**, a **functionality plugin**, and a **content seeder**.
-(The Next.js app in the repo root is the earlier prototype on Vercel. It isn't needed for the WordPress store.)
+(The Next.js app in the repo root is the Vercel preview of the same design and content. It isn't needed for the WordPress store.)
 
 ```
 wordpress/
@@ -22,7 +22,14 @@ wordpress/
 └── playground/blueprint.json   ← one-command local test site
 ```
 
-## Install on your WordPress site
+## Install on a new site (recommended path)
+
+Step-by-step guide: [`docs/INSTALL-NEW-SITE.md`](../docs/INSTALL-NEW-SITE.md). In short:
+1. `npm run package` builds `dist/evenly-theme.zip` and `dist/evenly-core.zip` (the plugin ZIP bundles `setup/`). They're also attached to each GitHub release.
+2. Upload the theme and plugin ZIPs in wp-admin and activate them.
+3. **Tools → Evenly Setup → Import**. That's one click, with no SSH needed.
+
+## Install with WP-CLI (developers / existing sites)
 
 1. **Back up the site** (your host's backup tool or UpdraftPlus).
 2. Zip and upload:
@@ -30,7 +37,7 @@ wordpress/
    - `themes/evenly` → Appearance → Themes → Add New → Upload → Activate
    (Try it on a **staging copy** first. Most hosts have one-click staging.)
 3. Go to **Settings → Evenly** and fill in your legal entity, address, support email, GA4 and Meta Pixel IDs.
-4. Upload the `setup` folder to `wp-content/nn-setup/` (SFTP or the host's file manager), then import with WP-CLI (SSH, or your host's WP-CLI console):
+4. Upload the `setup` folder to `wp-content/nn-setup/` (SFTP or the host's file manager), then import with WP-CLI (SSH, or your host's WP-CLI console), or use Tools → Evenly Setup:
    ```bash
    wp eval-file wp-content/nn-setup/seed.php
    ```

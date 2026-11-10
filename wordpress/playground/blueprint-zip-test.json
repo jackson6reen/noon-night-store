@@ -1,0 +1,20 @@
+{
+	"$schema": "https://playground.wordpress.net/blueprint-schema.json",
+	"landingPage": "/wp-admin/tools.php?page=evenly-setup",
+	"preferredVersions": { "php": "8.2", "wp": "latest" },
+	"features": { "networking": true },
+	"login": true,
+	"steps": [
+		{
+			"step": "installPlugin",
+			"pluginData": { "resource": "wordpress.org/plugins", "slug": "woocommerce" },
+			"options": { "activate": true }
+		},
+		{ "step": "installTheme", "themeData": { "resource": "vfs", "path": "/dist/evenly-theme.zip" }, "options": { "activate": true } },
+		{ "step": "installPlugin", "pluginData": { "resource": "vfs", "path": "/dist/evenly-core.zip" }, "options": { "activate": true } },
+		{
+			"step": "runPHP",
+			"code": "<?php require '/wordpress/wp-load.php'; update_option('woocommerce_coming_soon','no'); update_option('woocommerce_onboarding_profile', array('skipped' => true)); update_option('woocommerce_cod_settings', array('enabled' => 'yes', 'title' => 'Local test payment (Playground only)'));"
+		}
+	]
+}

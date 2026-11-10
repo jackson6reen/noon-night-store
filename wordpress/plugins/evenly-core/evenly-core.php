@@ -33,6 +33,7 @@ $nn_modules = array(
 	'consent',      // Cookie banner, Global Privacy Control, consent-gated GA4 / Meta Pixel.
 	'commerce',     // Free-shipping progress, trust badges under add-to-cart.
 	'offer',        // "Buy 2, get 1 free", Build-your-3 links, cart hand-off from the Vercel preview.
+	'setup-page',   // Tools > Evenly Setup: one-click content import (no WP-CLI needed).
 );
 
 foreach ( $nn_modules as $nn_module ) {
