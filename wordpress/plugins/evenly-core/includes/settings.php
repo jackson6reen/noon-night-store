@@ -45,6 +45,7 @@ function nn_settings_fields() {
 		'announcement'   => array( __( 'Announcement bar text', 'evenly' ), 'text', '' ),
 		'offer_enabled'  => array( __( '"Buy 2, get 1 free" on (1 = on, 0 = off)', 'evenly' ), 'number', __( 'Every 3rd single formula in the cart is free (the cheapest). Bundles are excluded.', 'evenly' ) ),
 		'offer_label'    => array( __( 'Offer label', 'evenly' ), 'text', __( 'Shown on badges and as the discount line in the cart.', 'evenly' ) ),
+		'manufacturing_claim_verified' => array( __( 'Manufacturing claims verified (1 = yes)', 'evenly' ), 'number', __( 'Set to 1 only after the supplier confirms US manufacturing + cGMP for every product. Until then those claims stay hidden.', 'evenly' ) ),
 		'ga4_id'         => array( __( 'GA4 Measurement ID', 'evenly' ), 'text', __( 'G-XXXXXXX. Loads only after the visitor accepts analytics cookies.', 'evenly' ) ),
 		'meta_pixel_id'  => array( __( 'Meta Pixel ID', 'evenly' ), 'text', __( 'Loads only after marketing consent, never when the browser sends Global Privacy Control.', 'evenly' ) ),
 		'policy_updated' => array( __( 'Policies last updated (YYYY-MM-DD)', 'evenly' ), 'text', '' ),

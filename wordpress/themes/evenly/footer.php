@@ -11,8 +11,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="nn-container nn-trust-strip__grid">
 		<p><?php echo nn_icon( 'shield' ); // phpcs:ignore ?> <span><?php echo esc_html( sprintf( /* translators: %d days */ __( '%d-day money-back guarantee', 'evenly' ), (int) nn_theme_option( 'guarantee_days', 30 ) ) ); ?></span></p>
 		<p><?php echo nn_icon( 'truck' ); // phpcs:ignore ?> <span><?php echo esc_html( sprintf( /* translators: %d dollars */ __( 'Free US shipping over $%d', 'evenly' ), (int) nn_theme_option( 'free_ship_min', 50 ) ) ); ?></span></p>
-		<p><?php echo nn_icon( 'flask' ); // phpcs:ignore ?> <span><?php esc_html_e( 'Made in the USA, cGMP facility', 'evenly' ); ?></span></p>
-		<p><?php echo nn_icon( 'heart' ); // phpcs:ignore ?> <span><?php esc_html_e( 'Real people answer support emails', 'evenly' ); ?></span></p>
+		<p><?php echo nn_icon( 'flask' ); // phpcs:ignore ?> <span><?php esc_html_e( 'Ingredients and safety notes on every product page', 'evenly' ); ?></span></p>
 	</div>
 </section>
 
@@ -20,7 +19,7 @@ defined( 'ABSPATH' ) || exit;
 	<div class="nn-container">
 		<div class="nn-footer__grid">
 			<div class="nn-footer__brand">
-				<p class="nn-footer__logo"><?php nn_logo( 34 ); ?></p>
+				<p class="nn-footer__logo"><?php nn_logo( 38, 'cream' ); ?></p>
 				<p><?php esc_html_e( 'Clean, honest formulas for sleep, cramps, bloating and stress. Made for women who are done just pushing through.', 'evenly' ); ?></p>
 				<p><a href="mailto:<?php echo esc_attr( antispambot( nn_theme_option( 'support_email' ) ) ); ?>"><?php echo esc_html( antispambot( nn_theme_option( 'support_email' ) ) ); ?></a></p>
 			</div>

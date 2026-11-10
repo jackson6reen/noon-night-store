@@ -31,7 +31,7 @@ defined( 'ABSPATH' ) || exit;
 			<?php if ( has_custom_logo() ) : ?>
 				<?php the_custom_logo(); ?>
 			<?php else : ?>
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php esc_attr_e( 'Evenly home', 'evenly' ); ?>"><?php nn_logo(); ?></a>
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home" aria-label="<?php esc_attr_e( 'evenly home', 'evenly' ); ?>"><?php nn_logo(); ?></a>
 			<?php endif; ?>
 		</div>
 

@@ -38,17 +38,21 @@ export function Icon({ name, size = 24 }: { name: string; size?: number }) {
   );
 }
 
-/** EVENLY logo: "=" mark (two even bars) + wordmark. Same as nn_logo() in the theme. */
-export function Logo({ size = 26 }: { size?: number }) {
+/**
+ * The approved evenly wordmark, extracted from brand/reference/evenly_logo_concepts.webp
+ * by scripts/brand/extract-logo.mjs (raster: no vector source has been supplied yet).
+ * Intrinsic size 1439x433, so height h → width h * 3.32.
+ */
+export function Logo({ height = 30, tone = "green" }: { height?: number; tone?: "green" | "cream" }) {
   return (
-    <>
-      <svg className="ev-mark" width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
-        <rect width="32" height="32" rx="7" fill="#F0503F" />
-        <rect x="7" y="10" width="18" height="4" rx="2" fill="#fff" />
-        <rect x="7" y="18" width="18" height="4" rx="2" fill="#fff" />
-      </svg>
-      <span className="ev-wordmark">Evenly</span>
-    </>
+    <img
+      className="ev-logo"
+      src={`/img/logo-${tone}.webp`}
+      alt="evenly"
+      width={Math.round(height * 3.323)}
+      height={height}
+      style={{ height, width: "auto" }}
+    />
   );
 }
 

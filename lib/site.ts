@@ -50,8 +50,23 @@ export type Product = {
   image: string;
   color: string;
   short_name: string;
+  /** Plain-language "who it's for" lines (no medical promises). */
+  who_for?: string[];
+  supplier?: { name: string; item: string; label_verified: boolean };
   isBundle: boolean;
 };
+
+/** True when doses/count were checked against the supplier's real label. Bundles inherit from their items. */
+export function labelVerified(p: Product): boolean {
+  if (p.isBundle) return (p.includes ?? []).every((sku) => {
+    const item = getProductBySku(sku);
+    return item ? labelVerified(item) : false;
+  });
+  return Boolean(p.supplier?.label_verified);
+}
+
+/** The count/format, shown only when it comes from a verified label. */
+export const verifiedFormat = (p: Product) => (!p.isBundle && labelVerified(p) && p.format ? p.format : null);
 
 export type ContentDoc = {
   type: "page" | "post";
@@ -175,13 +190,21 @@ export function toCard(p: Product) {
     image: img(p.image),
     accent: p.color,
     isBundle: p.isBundle,
+    format: verifiedFormat(p),
+    includesCount: p.includes?.length ?? 0,
   };
 }
 export type Card = ReturnType<typeof toCard>;
 
 export function concernColor(slug: string) {
-  return getConcern(slug)?.color ?? "#0B0B0C";
+  return getConcern(slug)?.color ?? "#123D38";
 }
+
+/**
+ * Manufacturing / certification claims ("Made in the USA", "cGMP") are shown only when
+ * business.json → manufacturing_claim_verified is true (confirmed with the supplier for every product).
+ */
+export const manufacturingVerified = () => Boolean(getBusiness().manufacturing_claim_verified);
 
 /** The site-wide offer: every 3rd single formula is free (cheapest one). Bundles excluded. */
 export function getOffer() {

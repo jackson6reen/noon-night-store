@@ -1,6 +1,6 @@
 {
-  "_readme": "Business details for the Vercel preview. On WordPress these come from Settings > Evenly (same keys). Keep both in sync.",
-  "business_name": "Evenly",
+  "_readme": "Business details for the Vercel preview. On WordPress these come from Settings > Evenly (same keys). Keep both in sync. Values in [BRACKETS] and example.com are LAUNCH BLOCKERS: replace with real details before taking orders.",
+  "business_name": "evenly",
   "legal_entity": "[LEGAL ENTITY NAME, e.g. Evenly LLC]",
   "address": "[BUSINESS MAILING ADDRESS]",
   "support_email": "support@example.com",
@@ -12,5 +12,6 @@
   "announcement": "Buy 2, get 1 free on every formula · Free US shipping over $50",
   "policy_updated": "2026-11-09",
   "offer_enabled": true,
-  "offer_label": "Buy 2, get 1 free"
+  "offer_label": "Buy 2, get 1 free",
+  "manufacturing_claim_verified": false
 }

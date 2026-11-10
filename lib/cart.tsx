@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { toItem, track } from "./analytics";
 
 export type CartLine = {
   slug: string;
@@ -69,6 +70,7 @@ export function CartProvider({ children, offer = true }: { children: React.React
   }, [lines, ready]);
 
   const add = useCallback((item: Omit<CartLine, "qty">, qty = 1, openDrawer = true) => {
+    track("add_to_cart", { value: item.price * qty, items: [toItem(item, qty)] });
     setLines((prev) => {
       const hit = prev.find((l) => l.slug === item.slug);
       if (hit) return prev.map((l) => (l.slug === item.slug ? { ...l, ...item, qty: l.qty + qty } : l));

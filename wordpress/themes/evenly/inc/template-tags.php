@@ -52,13 +52,15 @@ function nn_concern_image( $term ) {
 }
 
 /**
- * EVENLY logo: "=" mark + wordmark. A Custom Logo set in the Customizer replaces it.
+ * evenly logo (approved wordmark image). A Custom Logo set in the Customizer replaces it.
  */
-function nn_logo( $size = 26 ) {
+function nn_logo( $height = 30, $tone = 'green' ) {
+	// Approved wordmark extracted from brand/reference (raster; vector source not supplied yet).
 	printf(
-		'<svg class="ev-mark" width="%1$d" height="%1$d" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect width="32" height="32" rx="7" fill="#F0503F"/><rect x="7" y="10" width="18" height="4" rx="2" fill="#fff"/><rect x="7" y="18" width="18" height="4" rx="2" fill="#fff"/></svg><span class="ev-wordmark">%2$s</span>',
-		(int) $size,
-		esc_html( nn_theme_option( 'business_name', 'Evenly' ) )
+		'<img class="ev-logo" src="%1$s" alt="evenly" width="%2$d" height="%3$d" style="height:%3$dpx;width:auto">',
+		esc_url( nn_img( 'cream' === $tone ? 'logo-cream.webp' : 'logo-green.webp' ) ),
+		(int) round( $height * 3.323 ),
+		(int) $height
 	);
 }
 
@@ -67,7 +69,7 @@ function nn_logo( $size = 26 ) {
  */
 add_action( 'wp_head', function () {
 	if ( ! has_site_icon() ) {
-		echo '<link rel="icon" href="' . esc_url( nn_img( 'mark.svg' ) ) . '" type="image/svg+xml">' . "\n";
+		echo '<link rel="icon" href="' . esc_url( nn_img( 'icon-e-64.png' ) ) . '" type="image/png">' . "\n";
 	}
 } );
 

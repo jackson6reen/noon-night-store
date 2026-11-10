@@ -10,7 +10,7 @@
       "tagline": "For the 2 a.m. ceiling stare.",
       "content_file": "concerns/sleep.html",
       "image": "l-sleep.webp",
-      "color": "#4B2BB8"
+      "color": "#EE91AC"
     },
     {
       "slug": "period-comfort",
@@ -21,7 +21,7 @@
       "tagline": "For the days your cycle runs your calendar.",
       "content_file": "concerns/period-comfort.html",
       "image": "l-cycle.webp",
-      "color": "#F0503F"
+      "color": "#FF735E"
     },
     {
       "slug": "bloating-gut",
@@ -32,7 +32,7 @@
       "tagline": "For the 3 p.m. button-pop.",
       "content_file": "concerns/bloating-gut.html",
       "image": "l-gut.webp",
-      "color": "#3E9B2F"
+      "color": "#FFC857"
     },
     {
       "slug": "stress-calm",
@@ -43,7 +43,7 @@
       "tagline": "For when your mind won't clock out.",
       "content_file": "concerns/stress-calm.html",
       "image": "l-calm.webp",
-      "color": "#E5951A"
+      "color": "#FF735E"
     },
     {
       "slug": "bundles",
@@ -54,7 +54,7 @@
       "tagline": "Save up to 18% when you pair them.",
       "content_file": "concerns/bundles.html",
       "image": "lineup.webp",
-      "color": "#0B0B0C"
+      "color": "#123D38"
     }
   ],
   "products": [
@@ -89,7 +89,7 @@
       "faq": [
         [
           "Will magnesium glycinate make me groggy?",
-          "It isn't a sedative. Most people describe it as feeling physically \"unwound\" rather than drugged, and wake up clear."
+          "It isn't a sedative. Magnesium supports normal muscle relaxation; it doesn't knock you out.*"
         ],
         [
           "Can I take it for period cramps?",
@@ -106,25 +106,29 @@
         "label_verified": false
       },
       "image": "p-unwind.webp",
-      "color": "#2338C9",
-      "short_name": "Unwind"
+      "color": "#EE91AC",
+      "short_name": "Unwind",
+      "who_for": [
+        "You feel physically tense at night: tight shoulders, restless legs",
+        "You want magnesium in a form that's gentle on the stomach",
+        "You'd like support for occasional cramping around your period*"
+      ]
     },
     {
       "sku": "EV-SLEEP",
       "slug": "evenly-sleep-low-dose-sleep-formula",
-      "name": "Evenly Sleep: Low-Dose Sleep Formula",
+      "name": "Evenly Sleep: Melatonin Sleep Formula",
       "concerns": [
         "sleep"
       ],
       "price": 29,
       "format": "60 servings",
-      "tagline": "Fall asleep faster and wake up clear, not foggy.",
-      "short": "A low-dose melatonin formula with calming botanicals to help you fall asleep and stay asleep, without the next-morning fog.*",
-      "description": "<p>Most drugstore melatonin comes in 5–10 mg doses, far more than research suggests most people need. That's a big reason people wake up groggy and give up on it.</p><p>Evenly Sleep keeps melatonin low and pairs it with gentle calming botanicals. It's built for the nights you lie there with your mind racing, and for the 3 a.m. wake-ups.</p>",
+      "tagline": "A melatonin formula for the nights your mind won't switch off.",
+      "short": "A melatonin-based sleep formula to help you fall asleep and stay asleep.*",
+      "description": "<p>Lying awake while your brain replays the day? Melatonin is the hormone your body releases when it gets dark, and as a supplement it's best studied for helping you fall asleep a little faster.*</p><p>Plenty of drugstore melatonin comes in 5–10 mg doses, more than many people need. We'll publish the exact dose in this formula as soon as the final label is confirmed with our manufacturer.</p>",
       "benefits": [
         "Helps you fall asleep faster*",
-        "Supports staying asleep through the night*",
-        "Low dose, designed to avoid morning grogginess"
+        "Supports staying asleep through the night*"
       ],
       "how_to_use": "Take 1 serving 30 minutes before bed. Not for daily use longer than recommended on the label. Do not drive after taking.",
       "ingredients": [
@@ -146,8 +150,8 @@
           "Melatonin isn't considered habit-forming, and we keep the dose low on purpose. Use it for occasional sleeplessness, along with good wind-down habits."
         ],
         [
-          "Why low-dose?",
-          "More melatonin isn't better. Lower doses are associated with less next-day grogginess."
+          "How much melatonin is in it?",
+          "We publish exact amounts from the final, verified label. Until that label is confirmed, we don't list a number, and we never guess."
         ]
       ],
       "supplier": {
@@ -156,8 +160,13 @@
         "label_verified": false
       },
       "image": "p-sleep.webp",
-      "color": "#4B2BB8",
-      "short_name": "Sleep"
+      "color": "#EE91AC",
+      "short_name": "Sleep",
+      "who_for": [
+        "You lie awake with a busy mind at bedtime",
+        "Your schedule is off: late nights, travel, early alarms",
+        "You want an occasional sleep aid, not a nightly habit"
+      ]
     },
     {
       "sku": "EV-CYCLE",
@@ -235,8 +244,13 @@
         "label_verified": true
       },
       "image": "p-cycle.webp",
-      "color": "#F0503F",
-      "short_name": "Cycle"
+      "color": "#FF735E",
+      "short_name": "Cycle",
+      "who_for": [
+        "PMS shows up every month: mood swings, tender breasts, bloating",
+        "You are not on hormonal birth control or hormone therapy",
+        "You're up for a daily formula over 2–3 cycles"
+      ]
     },
     {
       "sku": "EV-DIGEST",
@@ -281,8 +295,13 @@
         "label_verified": true
       },
       "image": "p-digest.webp",
-      "color": "#3E9B2F",
-      "short_name": "Digest"
+      "color": "#FFC857",
+      "short_name": "Digest",
+      "who_for": [
+        "You bloat after meals, especially lunch",
+        "You want something you take with food, not all day",
+        "Bloating gets worse in the days before your period"
+      ]
     },
     {
       "sku": "EV-FLORA",
@@ -331,8 +350,12 @@
         "label_verified": true
       },
       "image": "p-flora.webp",
-      "color": "#0E8A7E",
-      "short_name": "Flora"
+      "color": "#FFC857",
+      "short_name": "Flora",
+      "who_for": [
+        "Your digestion feels off after antibiotics, travel or stress",
+        "You want a daily probiotic with prebiotic fiber"
+      ]
     },
     {
       "sku": "EV-RESTORE",
@@ -372,8 +395,12 @@
         "label_verified": true
       },
       "image": "p-restore.webp",
-      "color": "#E8708F",
-      "short_name": "Restore"
+      "color": "#FF735E",
+      "short_name": "Restore",
+      "who_for": [
+        "You want simple gut-lining support you can stir into tea",
+        "You'd rather take a powder than more capsules"
+      ]
     },
     {
       "sku": "EV-CALM",
@@ -414,8 +441,12 @@
         "label_verified": false
       },
       "image": "p-calm.webp",
-      "color": "#E5951A",
-      "short_name": "Calm"
+      "color": "#FFC857",
+      "short_name": "Calm",
+      "who_for": [
+        "Busy days leave you wound up at bedtime",
+        "You want everyday stress support without feeling sleepy*"
+      ]
     }
   ],
   "bundles": [
@@ -444,7 +475,7 @@
       ],
       "how_to_use": "Morning: 2 Evenly Cycle with breakfast. Meals: 1 Evenly Digest with your two largest meals. Evening: 2 Evenly Unwind before bed.",
       "image": "k-cycle.webp",
-      "color": "#F0503F",
+      "color": "#FF735E",
       "short_name": "Cycle Kit"
     },
     {
@@ -462,7 +493,7 @@
       ],
       "tagline": "Body unwinds, mind switches off.",
       "short": "Evenly Unwind magnesium relaxes the body; Evenly Sleep helps you fall asleep. The two-step bedtime routine.*",
-      "description": "<p>Most sleep products only work on one thing. The Sleep Stack relaxes your body with magnesium glycinate and signals your brain that it's time to sleep with low-dose melatonin and calming botanicals.</p>",
+      "description": "<p>Most sleep products only work on one thing. The Sleep Stack relaxes your body with magnesium glycinate and signals your brain that it's time to sleep with a melatonin formula.</p>",
       "benefits": [
         "Supports falling asleep and staying asleep*",
         "Supports muscle relaxation*",
@@ -470,7 +501,7 @@
       ],
       "how_to_use": "60 minutes before bed: 2 Evenly Unwind. 30 minutes before bed: 1 serving Evenly Sleep.",
       "image": "k-sleep.webp",
-      "color": "#4B2BB8",
+      "color": "#EE91AC",
       "short_name": "Sleep Stack"
     },
     {
@@ -496,7 +527,7 @@
       ],
       "how_to_use": "Morning: 2 Evenly Flora. Meals: 1 Evenly Digest with your two largest meals.",
       "image": "k-gut.webp",
-      "color": "#3E9B2F",
+      "color": "#FFC857",
       "short_name": "Gut Reset"
     },
     {
@@ -525,7 +556,7 @@
       ],
       "how_to_use": "Morning: 2 Evenly Flora. Meals: 1 Evenly Digest. Bedtime: 2 Evenly Unwind + 1 serving Evenly Sleep.",
       "image": "k-full.webp",
-      "color": "#0B0B0C",
+      "color": "#123D38",
       "short_name": "Full Reset"
     }
   ]

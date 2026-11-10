@@ -1,6 +1,14 @@
-# Evenly: supplement store
+# evenly: supplement store
 
-**EVENLY**: relief-first supplements for US women (sleep, period comfort, bloating and stress). Brand system: heavy extended display type (Archivo Expanded), black / off-white with a coral accent (#F0503F), and a "=" mark meaning "even". Label colors per formula are in `products.json`.
+**evenly** (always lowercase): supplements for US women covering sleep, period comfort, bloating and stress.
+
+**Brand: Sunlit Balance** (source files in `brand/reference/`)
+- **Colors:** cream `#FFF8EC` and deep green `#123D38` for most of the screen. Coral `#FF735E`, mango `#FFC857` and guava `#EE91AC` are for accents, products and graphics only.
+- **Type:** Plus Jakarta Sans.
+- **Graphics:** overlapping quarter/half circles ("fruit slices").
+- **Logo:** the approved wordmark, extracted from the logo sheet by `scripts/brand/extract-logo.mjs`. No vector file has been supplied yet; see [docs/LAUNCH-BLOCKERS.md](docs/LAUNCH-BLOCKERS.md).
+- **Product images:** renders of the label system from real product data (`scripts/brand/render-packaging.mjs`, captioned "Packaging render") until printed packaging exists.
+- **Design tokens:** the top of `wordpress/themes/evenly/assets/css/main.css`.
 
 Code note: PHP functions and CSS classes keep the `nn_` / `nn-` prefix from the original project name. New brand-specific pieces use `ev-`.
 

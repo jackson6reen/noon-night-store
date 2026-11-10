@@ -1,43 +1,34 @@
 <?php
 /**
- * Home: why we're different (objection handling).
+ * Home: "What to look for in your supplements": criteria + evenly's verifiable proof.
+ * (Replaces the old drugstore comparison, which generalized about other brands.)
  *
  * @package Evenly
  */
 
 defined( 'ABSPATH' ) || exit;
 
-$rows = array(
-	array( __( 'Melatonin dose', 'evenly' ), __( 'Often 5–10 mg, the "groggy tomorrow" dose', 'evenly' ), __( 'Low dose, paired with magnesium', 'evenly' ) ),
-	array( __( 'Magnesium form', 'evenly' ), __( 'Oxide: cheap, poorly absorbed, laxative', 'evenly' ), __( 'Glycinate: gentle and well absorbed', 'evenly' ) ),
-	array( __( 'Labels', 'evenly' ), __( '"Proprietary blends" that hide the doses', 'evenly' ), __( 'Every ingredient and amount listed', 'evenly' ) ),
-	array( __( 'Approach', 'evenly' ), __( 'Mask one symptom for a few hours', 'evenly' ), __( 'Daily routines that support the root rhythm*', 'evenly' ) ),
-	array( __( 'If it doesn\'t work', 'evenly' ), __( 'You\'re out the money', 'evenly' ), __( 'Full refund on your first order', 'evenly' ) ),
+$days  = (int) nn_theme_option( 'guarantee_days', 30 );
+$items = array(
+	array( '#EE91AC', __( 'The form of the nutrient', 'evenly' ), __( 'Magnesium oxide is cheap but poorly absorbed and often has a laxative effect. Glycinate is gentler on the stomach.', 'evenly' ), __( 'Unwind uses magnesium glycinate.', 'evenly' ) ),
+	array( '#FF735E', __( 'Ingredients you can see', 'evenly' ), __( '"Proprietary blends" can hide how much of each ingredient you are getting.', 'evenly' ), __( 'Every product page lists the ingredients, and amounts from each verified label.', 'evenly' ) ),
+	array( '#FFC857', __( "Who shouldn't take it", 'evenly' ), __( 'Some herbs and hormones interact with birth control, antidepressants or blood thinners.', 'evenly' ), __( 'Each product has a Safety section with specific warnings.', 'evenly' ) ),
+	array( '#123D38', __( "What happens if it's not for you", 'evenly' ), __( "Supplements don't work the same for everyone.", 'evenly' ), sprintf( /* translators: %d days */ __( 'Your first order is covered by a %d-day money-back guarantee.', 'evenly' ), $days ) ),
 );
 ?>
-<section class="nn-section nn-container" aria-labelledby="nn-diff-title">
+<section class="nn-section nn-container" aria-labelledby="ev-look-title">
 	<div class="nn-section__head">
-		<h2 id="nn-diff-title"><?php esc_html_e( 'Why women switch from the drugstore aisle', 'evenly' ); ?></h2>
-		<p><?php esc_html_e( 'You\'ve probably tried something already. Here\'s what we do differently.', 'evenly' ); ?></p>
+		<p class="nn-eyebrow"><?php esc_html_e( 'Before you buy any supplement', 'evenly' ); ?></p>
+		<h2 id="ev-look-title"><?php esc_html_e( 'What to look for in your supplements', 'evenly' ); ?></h2>
+		<p><?php esc_html_e( "Four checks we'd use on any brand, including ours.", 'evenly' ); ?></p>
 	</div>
-	<div class="nn-table-wrap">
-		<table class="nn-compare">
-			<thead>
-				<tr>
-					<td></td>
-					<th scope="col"><?php esc_html_e( 'Typical drugstore', 'evenly' ); ?></th>
-					<th scope="col" class="nn-compare__us"><?php bloginfo( 'name' ); ?></th>
-				</tr>
-			</thead>
-			<tbody>
-				<?php foreach ( $rows as $row ) : ?>
-					<tr>
-						<th scope="row"><?php echo esc_html( $row[0] ); ?></th>
-						<td><?php echo esc_html( $row[1] ); ?></td>
-						<td class="nn-compare__us"><?php echo esc_html( $row[2] ); ?></td>
-					</tr>
-				<?php endforeach; ?>
-			</tbody>
-		</table>
-	</div>
+	<ul class="ev-criteria">
+		<?php foreach ( $items as $item ) : ?>
+			<li style="--dot:<?php echo esc_attr( $item[0] ); ?>">
+				<h3><?php echo esc_html( $item[1] ); ?></h3>
+				<p><?php echo esc_html( $item[2] ); ?></p>
+				<p><strong>evenly:</strong> <?php echo esc_html( $item[3] ); ?></p>
+			</li>
+		<?php endforeach; ?>
+	</ul>
 </section>

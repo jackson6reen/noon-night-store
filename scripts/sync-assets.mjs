@@ -8,5 +8,8 @@ const to = path.join(process.cwd(), "public", "img");
 fs.rmSync(to, { recursive: true, force: true });
 fs.mkdirSync(to, { recursive: true });
 for (const f of fs.readdirSync(from)) fs.copyFileSync(path.join(from, f), path.join(to, f));
-fs.copyFileSync(path.join(from, "mark.svg"), path.join(process.cwd(), "app", "icon.svg"));
+// Favicon / app icon: the approved "e" icon from the logo sheet.
+fs.rmSync(path.join(process.cwd(), "app", "icon.svg"), { force: true });
+fs.copyFileSync(path.join(from, "icon-e.png"), path.join(process.cwd(), "app", "icon.png"));
+fs.copyFileSync(path.join(from, "icon-e.png"), path.join(process.cwd(), "app", "apple-icon.png"));
 console.log(`synced ${fs.readdirSync(to).length} images`);

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
 import { Icon, Logo } from "./Icon";
@@ -12,6 +12,7 @@ export function Header({ nav, announcement }: { nav: { label: string; href: stri
   const { count, setOpen: openCart } = useCart();
   const navRef = useRef<HTMLElement>(null);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     document.body.classList.toggle("nn-nav-open", open);
@@ -31,20 +32,20 @@ export function Header({ nav, announcement }: { nav: { label: string; href: stri
             <Icon name="menu" />
             <span className="screen-reader-text">Menu</span>
           </button>
-          <div className="nn-logo"><Link href="/" rel="home" aria-label="Evenly home"><Logo /></Link></div>
+          <div className="nn-logo"><Link href="/" rel="home" aria-label="evenly home"><Logo /></Link></div>
           <nav id="nn-nav" ref={navRef} className={`nn-nav${open ? " is-open" : ""}`} aria-label="Main">
             <ul>
               {nav.map((item) => (
-                <li key={item.href}><Link href={item.href} onClick={() => setOpen(false)}>{item.label}</Link></li>
+                <li key={item.href}><Link href={item.href} aria-current={pathname === item.href ? "page" : undefined} onClick={() => setOpen(false)}>{item.label}</Link></li>
               ))}
             </ul>
           </nav>
           <div className="nn-header__actions">
-            <button className="nn-icon-btn" type="button" aria-expanded={search} onClick={() => setSearch(!search)}>
+            <button className="nn-icon-btn" type="button" aria-expanded={search} aria-controls="ev-search" onClick={() => setSearch(!search)}>
               <Icon name="search" />
               <span className="screen-reader-text">Search</span>
             </button>
-            <button className="nn-icon-btn nn-cart-link" type="button" onClick={() => openCart(true)}>
+            <button id="ev-cart-button" className="nn-icon-btn nn-cart-link" type="button" aria-haspopup="dialog" onClick={() => openCart(true)}>
               <Icon name="cart" />
               <span className="screen-reader-text">Cart</span>
               <span className="nn-cart-count" aria-label={`${count} items in cart`}>{count}</span>
@@ -52,7 +53,7 @@ export function Header({ nav, announcement }: { nav: { label: string; href: stri
           </div>
         </div>
         {search && (
-          <div className="nn-search-panel">
+          <div className="nn-search-panel" id="ev-search">
             <div className="nn-container">
               <form
                 role="search"

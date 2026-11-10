@@ -55,7 +55,9 @@ add_action( 'woocommerce_after_add_to_cart_form', function () {
 	echo '<li>' . esc_html( sprintf( __( '%d-day money-back guarantee', 'evenly' ), $days ) ) . '</li>';
 	/* translators: %d: dollar threshold */
 	echo '<li>' . esc_html( sprintf( __( 'Free US shipping over $%d', 'evenly' ), $min ) ) . '</li>';
-	echo '<li>' . esc_html__( 'Made in the USA · cGMP facility', 'evenly' ) . '</li>';
+	if ( nn_option( 'manufacturing_claim_verified' ) ) {
+		echo '<li>' . esc_html__( 'Made in the USA · cGMP facility', 'evenly' ) . '</li>';
+	}
 	echo '<li>' . esc_html__( 'Secure checkout by Stripe', 'evenly' ) . '</li>';
 	echo '</ul>';
 }, 5 );

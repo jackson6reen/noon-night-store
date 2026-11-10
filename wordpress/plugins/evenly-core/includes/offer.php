@@ -134,6 +134,6 @@ add_action( 'woocommerce_single_product_summary', function () {
 	printf(
 		'<p class="ev-offer-note"><span class="nn-badge">%s</span> <span>%s</span></p>',
 		esc_html( nn_option( 'offer_label' ) ),
-		wp_kses_post( __( 'Add any 3 formulas and <strong>the cheapest is free</strong>. Applied in your cart.', 'evenly' ) )
+		wp_kses_post( __( 'Add any 3 formulas and <strong>the lowest-priced one is free</strong>. Applied in your cart.', 'evenly' ) )
 	);
 }, 25 );

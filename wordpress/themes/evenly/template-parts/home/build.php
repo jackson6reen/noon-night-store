@@ -31,7 +31,7 @@ $label = nn_theme_option( 'offer_label', 'Buy 2, get 1 free' );
 		<div class="nn-section__head">
 			<p class="nn-eyebrow"><?php echo esc_html( $label ); ?></p>
 			<h2 id="ev-build-title"><?php esc_html_e( 'Build your 3. Pay for 2.', 'evenly' ); ?></h2>
-			<p><?php esc_html_e( 'Mix any three formulas into your own routine. The cheapest one is on us.', 'evenly' ); ?></p>
+			<p><?php esc_html_e( 'Mix any three formulas into your own routine. The lowest-priced one is on us.', 'evenly' ); ?></p>
 		</div>
 		<form class="ev-build__grid" action="<?php echo esc_url( home_url( '/' ) ); ?>" method="get" data-ev-build>
 			<fieldset class="ev-build__options" style="border:0;padding:0;margin:0">
@@ -66,7 +66,7 @@ $label = nn_theme_option( 'offer_label', 'Buy 2, get 1 free' );
 				<div class="ev-summary__row"><span data-ev-count>0/3 <?php esc_html_e( 'selected', 'evenly' ); ?></span><span data-ev-left></span></div>
 				<div class="ev-summary__row ev-summary__row--total"><span><?php esc_html_e( 'Total', 'evenly' ); ?></span><span data-ev-total>$0.00</span></div>
 				<button type="submit" class="nn-btn nn-btn--lg nn-btn--block" data-ev-submit><?php esc_html_e( 'Add my 3 to cart', 'evenly' ); ?></button>
-				<p class="ev-summary__note"><?php esc_html_e( 'The cheapest formula is free. Mix and match any way you like. Covered by our 30-day guarantee.', 'evenly' ); ?></p>
+				<p class="ev-summary__note"><?php esc_html_e( 'The lowest-priced formula is free. Just want one? Every formula is also sold on its own.', 'evenly' ); ?></p>
 			</aside>
 		</form>
 	</div>

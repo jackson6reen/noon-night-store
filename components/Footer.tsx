@@ -34,15 +34,14 @@ export function Footer() {
         <div className="nn-container nn-trust-strip__grid">
           <p><Icon name="shield" /> <span>{b.guarantee_days}-day money-back guarantee</span></p>
           <p><Icon name="truck" /> <span>Free US shipping over ${b.free_ship_min}</span></p>
-          <p><Icon name="flask" /> <span>Made in the USA, cGMP facility</span></p>
-          <p><Icon name="heart" /> <span>Real people answer support emails</span></p>
+          <p><Icon name="flask" /> <span>Ingredients and safety notes on every product page</span></p>
         </div>
       </section>
       <footer className="nn-footer">
         <div className="nn-container">
           <div className="nn-footer__grid">
             <div className="nn-footer__brand">
-              <p className="nn-footer__logo"><Logo size={34} /></p>
+              <p className="nn-footer__logo"><Logo height={38} tone="cream" /></p>
               <p>Clean, honest formulas for sleep, cramps, bloating and stress. Made for women who are done just pushing through.</p>
               <p><a href={`mailto:${b.support_email}`}>{b.support_email}</a></p>
             </div>

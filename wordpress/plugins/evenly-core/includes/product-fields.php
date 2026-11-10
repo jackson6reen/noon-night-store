@@ -132,7 +132,11 @@ add_filter( 'woocommerce_product_tabs', function ( $tabs ) {
 			'priority' => 12,
 			'callback' => function () use ( $id ) {
 				echo '<h2>' . esc_html__( 'How to take', 'evenly' ) . '</h2>';
-				echo wp_kses_post( wpautop( esc_html( nn_product_field( $id, '_nn_how_to_use' ) ) ) );
+				if ( 'yes' === nn_product_field( $id, '_nn_label_verified' ) || nn_product_field( $id, '_nn_includes' ) ) {
+					echo wp_kses_post( wpautop( esc_html( nn_product_field( $id, '_nn_how_to_use' ) ) ) );
+				} else {
+					echo '<p><span class="ev-pending">' . esc_html__( 'Pending final label', 'evenly' ) . '</span> ' . esc_html__( 'Directions will match the printed label exactly.', 'evenly' ) . '</p>';
+				}
 			},
 		);
 	}
@@ -171,11 +175,21 @@ function nn_render_ingredients_tab() {
 	$rows = nn_pairs( nn_product_field( get_the_ID(), '_nn_ingredients' ), 3 );
 	echo '<h2>' . esc_html__( "What's inside, and why", 'evenly' ) . '</h2>';
 	echo '<table class="nn-ingredients"><thead><tr><th scope="col">' . esc_html__( 'Ingredient', 'evenly' ) . '</th><th scope="col">' . esc_html__( 'Per serving', 'evenly' ) . '</th><th scope="col">' . esc_html__( 'Why it\'s here', 'evenly' ) . '</th></tr></thead><tbody>';
+	// Amounts are shown only from a label checked against the supplier ("Label checked" box).
+	$verified = 'yes' === nn_product_field( get_the_ID(), '_nn_label_verified' );
+	$pending  = '<span class="ev-pending">' . esc_html__( 'Pending final label', 'evenly' ) . '</span>';
 	foreach ( $rows as $row ) {
-		printf( '<tr><td>%s</td><td>%s</td><td>%s</td></tr>', esc_html( $row[0] ), esc_html( $row[1] ), esc_html( $row[2] ) );
+		printf( '<tr><td>%s</td><td>%s</td><td>%s</td></tr>', esc_html( $row[0] ), $verified ? esc_html( $row[1] ) : $pending, esc_html( $row[2] ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- $pending is static escaped markup.
 	}
 	echo '</tbody></table>';
-	echo '<p class="nn-small">' . esc_html__( 'Made in the USA in an FDA-registered, cGMP-certified facility. See the Supplement Facts panel in the product photos for the full label.', 'evenly' ) . '</p>';
+	echo '<p class="nn-small"><strong>' . esc_html__( 'Supplement Facts:', 'evenly' ) . '</strong> ' . esc_html__( 'a photo of the printed panel will be added with the final label.', 'evenly' );
+	if ( ! $verified ) {
+		echo ' ' . esc_html__( 'Amounts are published only from the verified label.', 'evenly' );
+	}
+	if ( nn_option( 'manufacturing_claim_verified' ) ) {
+		echo ' ' . esc_html__( 'Made in the USA in a cGMP-certified facility.', 'evenly' );
+	}
+	echo '</p>';
 }
 
 /**

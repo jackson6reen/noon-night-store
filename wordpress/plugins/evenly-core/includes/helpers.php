@@ -23,6 +23,7 @@ function nn_option_defaults() {
 		'announcement'       => 'Buy 2, get 1 free on every formula · Free US shipping over $50',
 		'offer_enabled'      => 1,
 		'offer_label'        => 'Buy 2, get 1 free',
+		'manufacturing_claim_verified' => 0,
 		'ga4_id'             => '',
 		'meta_pixel_id'      => '',
 		'policy_updated'     => '2026-11-09',

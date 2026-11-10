@@ -13,7 +13,7 @@ add_action( 'wp_enqueue_scripts', function () {
 
 	wp_enqueue_style(
 		'nn-fonts',
-		'https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,700;125,800;125,900&family=Inter:wght@400;500;600;700;800&display=swap',
+		'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap',
 		array(),
 		null // phpcs:ignore WordPress.WP.EnqueuedResourceParameters.MissingVersion
 	);

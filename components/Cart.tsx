@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { useCart, wooCheckoutUrl } from "@/lib/cart";
+import { toItem, track } from "@/lib/analytics";
 import { Bottle, Icon } from "./Icon";
 
 const usd = (n: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
@@ -13,13 +15,13 @@ export function ShippingBar({ min }: { min: number }) {
   const pct = Math.min(100, Math.round((total / min) * 100));
   return (
     <div className="nn-ship-bar" role="status">
-      <p>{left > 0 ? <>You&apos;re {usd(left)} away from free shipping</> : <>You unlocked free US shipping</>}</p>
+      <p>{left > 0 ? <>You&apos;re {usd(left)} away from free US shipping</> : <>You unlocked free US shipping</>}</p>
       <div className="nn-ship-bar__track" aria-hidden="true"><span style={{ width: `${pct}%` }} /></div>
     </div>
   );
 }
 
-/** Nudges toward the 3rd (free) formula, the main AOV lever. */
+/** Progress toward the free formula. Informative only: one formula is a complete order too. */
 export function OfferNudge() {
   const { lines, freeCount } = useCart();
   const singles = lines.filter((l) => !l.isBundle).reduce((n, l) => n + l.qty, 0);
@@ -28,29 +30,29 @@ export function OfferNudge() {
   return (
     <p className="ev-offer-note" role="status">
       {freeCount > 0 && toNext === 3
-        ? <><strong>{freeCount} formula{freeCount > 1 ? "s" : ""} free!</strong> Buy 2, get 1 free is applied.</>
-        : <>Add <strong>{toNext} more formula{toNext > 1 ? "s" : ""}</strong> and {toNext === 1 ? "it's" : "the 3rd is"} free.</>}
+        ? <><strong>The lowest-priced formula is free.</strong> Buy 2, get 1 free is applied.</>
+        : <>Add <strong>{toNext} more formula{toNext > 1 ? "s" : ""}</strong> and the lowest-priced one is free. Optional.</>}
     </p>
   );
 }
 
-export function CartLines() {
+export function CartLines({ onNavigate }: { onNavigate?: () => void }) {
   const { lines, setQty, remove } = useCart();
   return (
     <ul className="nn-cart-lines">
       {lines.map((l) => (
         <li key={l.slug}>
-          <span className="nn-cart-lines__img">{l.image ? <img src={l.image} alt="" width={72} height={72} /> : <Bottle label={l.name} accent={l.line} />}</span>
+          <span className="nn-cart-lines__img">{l.image ? <img src={l.image} alt="" width={80} height={80} /> : <Bottle label={l.name} accent={l.line} />}</span>
           <div className="nn-cart-lines__body">
             <div className="nn-cart-lines__top">
-              <Link href={`/product/${l.slug}/`}>{l.name}</Link>
+              <Link href={`/product/${l.slug}/`} onClick={onNavigate}>{l.name}</Link>
               <span>{usd(l.price * l.qty)}</span>
             </div>
             <div className="nn-cart-lines__qty">
-              <button type="button" aria-label={`Decrease ${l.name}`} onClick={() => setQty(l.slug, l.qty - 1)}>−</button>
-              <span aria-live="polite">{l.qty}</span>
-              <button type="button" aria-label={`Increase ${l.name}`} onClick={() => setQty(l.slug, l.qty + 1)}>+</button>
-              <button type="button" className="nn-link-btn" onClick={() => remove(l.slug)}>Remove</button>
+              <button type="button" aria-label={`Decrease quantity of ${l.name}`} onClick={() => setQty(l.slug, l.qty - 1)}>−</button>
+              <span aria-live="polite" aria-label={`Quantity ${l.qty}`}>{l.qty}</span>
+              <button type="button" aria-label={`Increase quantity of ${l.name}`} onClick={() => setQty(l.slug, l.qty + 1)}>+</button>
+              <button type="button" className="nn-link-btn" onClick={() => remove(l.slug)}>Remove<span className="screen-reader-text"> {l.name}</span></button>
             </div>
           </div>
         </li>
@@ -71,36 +73,75 @@ function Totals({ shipping }: { shipping?: number | null }) {
   );
 }
 
+const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+/**
+ * Side cart. Closes with the close button, Escape, a click on the backdrop, or any navigation
+ * (so clicking a product inside the cart never leaves an open drawer behind). Focus is trapped
+ * while open and returns to the element that opened it.
+ */
 export function CartDrawer({ freeShipMin }: { freeShipMin: number }) {
   const { open, setOpen, lines } = useCart();
+  const panel = useRef<HTMLElement>(null);
+  const opener = useRef<HTMLElement | null>(null);
+  const pathname = usePathname();
+  const close = () => setOpen(false);
+
+  // Close on any route change.
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [setOpen]);
+    setOpen(false);
+  }, [pathname, setOpen]);
+
+  // Focus management + Escape + focus trap.
+  useEffect(() => {
+    if (!open) return;
+    opener.current = document.activeElement as HTMLElement | null;
+    const first = panel.current?.querySelector<HTMLElement>(FOCUSABLE);
+    first?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+      }
+      if (e.key === "Tab" && panel.current) {
+        const items = Array.from(panel.current.querySelectorAll<HTMLElement>(FOCUSABLE));
+        if (!items.length) return;
+        const [a, z] = [items[0], items[items.length - 1]];
+        if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); }
+        else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); }
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      const o = opener.current;
+      const back = o && o !== document.body && document.contains(o) ? o : document.getElementById("ev-cart-button");
+      back?.focus();
+    };
+  }, [open, setOpen]);
 
   return (
-    <div className={`nn-drawer${open ? " is-open" : ""}`} aria-hidden={!open}>
-      <div className="nn-drawer__backdrop" onClick={() => setOpen(false)} />
-      <aside className="nn-drawer__panel" role="dialog" aria-label="Your cart">
+    <div className={`nn-drawer${open ? " is-open" : ""}`} inert={!open}>
+      <button type="button" className="nn-drawer__backdrop" aria-label="Close cart" tabIndex={-1} onClick={close} />
+      <aside ref={panel} className="nn-drawer__panel" role="dialog" aria-modal="true" aria-labelledby="ev-cart-title">
         <div className="nn-drawer__head">
-          <h2>Your cart</h2>
-          <button type="button" className="nn-icon-btn" onClick={() => setOpen(false)}><Icon name="close" /><span className="screen-reader-text">Close cart</span></button>
+          <h2 id="ev-cart-title">Your cart</h2>
+          <button type="button" className="nn-icon-btn" onClick={close}><Icon name="close" /><span className="screen-reader-text">Close cart</span></button>
         </div>
         {lines.length === 0 ? (
           <div className="nn-drawer__empty">
             <p>Your cart is empty.</p>
-            <Link href="/shop/" className="nn-btn" onClick={() => setOpen(false)}>Shop all</Link>
+            <Link href="/shop/" className="nn-btn" onClick={close}>Shop all formulas</Link>
           </div>
         ) : (
           <>
             <ShippingBar min={freeShipMin} />
             <OfferNudge />
-            <div className="nn-drawer__lines"><CartLines /></div>
+            <div className="nn-drawer__lines"><CartLines onNavigate={close} /></div>
             <div className="nn-drawer__foot">
               <Totals />
-              <Link href="/checkout/" className="nn-btn nn-btn--accent nn-btn--lg nn-btn--block" onClick={() => setOpen(false)}>Checkout</Link>
-              <Link href="/cart/" className="nn-drawer__view" onClick={() => setOpen(false)}>View cart</Link>
+              <Link href="/checkout/" className="nn-btn nn-btn--lg nn-btn--block" onClick={close}>Checkout</Link>
+              <Link href="/cart/" className="nn-drawer__view" onClick={close}>View cart</Link>
             </div>
           </>
         )}
@@ -124,8 +165,16 @@ export function CheckoutPanel({ wooBase, freeShipMin, flat }: { wooBase: string 
   const { lines, total, ready } = useCart();
   const [ack, setAck] = useState(false);
   const [error, setError] = useState(false);
+  const tracked = useRef(false);
+
+  useEffect(() => {
+    if (!ready || !lines.length || tracked.current) return;
+    tracked.current = true;
+    track("begin_checkout", { value: total, items: lines.map((l) => toItem(l, l.qty)) });
+  }, [ready, lines, total]);
+
   if (!ready) return null;
-  if (!lines.length) return <div className="nn-drawer__empty"><p>Your cart is empty.</p><Link href="/shop/" className="nn-btn">Shop all</Link></div>;
+  if (!lines.length) return <div className="nn-drawer__empty"><p>Your cart is empty.</p><Link href="/shop/" className="nn-btn">Shop all formulas</Link></div>;
   const shipping = total >= freeShipMin ? 0 : flat;
 
   return (
@@ -139,12 +188,12 @@ export function CheckoutPanel({ wooBase, freeShipMin, flat }: { wooBase: string 
         </label>
         {error && <p className="nn-form-error" role="alert">Please confirm you have read the product warnings.</p>}
         {wooBase ? (
-          <button type="button" className="nn-btn nn-btn--accent nn-btn--lg nn-btn--block" onClick={() => (ack ? (window.location.href = wooCheckoutUrl(wooBase, lines)) : setError(true))}>
-            Secure checkout
+          <button type="button" className="nn-btn nn-btn--lg nn-btn--block" onClick={() => (ack ? (window.location.href = wooCheckoutUrl(wooBase, lines)) : setError(true))}>
+            Continue to secure payment
           </button>
         ) : (
           <div className="nn-callout">
-            <p><strong>Preview store.</strong> Payments run on the WooCommerce site. Set <code>WOOCOMMERCE_URL</code> in Vercel to send this cart there.</p>
+            <p><strong>Preview store.</strong> Payment runs on the WooCommerce site. Set <code>WOOCOMMERCE_URL</code> in Vercel to send this cart there.</p>
           </div>
         )}
       </aside>
