@@ -15,7 +15,7 @@ function nn_option_defaults() {
 		'business_name'      => 'Evenly',
 		'legal_entity'       => '[LEGAL ENTITY NAME, e.g. Evenly LLC]',
 		'address'            => '[BUSINESS MAILING ADDRESS]',
-		'support_email'      => 'support@example.com',
+		'support_email'      => 'support@evenlylife.com',
 		'phone'              => '',
 		'state_of_law'       => '[STATE, e.g. Delaware]',
 		'free_ship_min'      => 50,

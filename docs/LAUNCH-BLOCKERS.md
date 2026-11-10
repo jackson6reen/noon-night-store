@@ -19,7 +19,8 @@ Amounts, counts and directions are hidden and shown as "Pending final label" unt
 | Kits containing the above (Sleep Stack, Cycle Kit, Full Reset, Gut Reset*) | Directions pending until all items are verified. *Gut Reset items are verified. |
 
 ## Business + legal
-- [ ] Real **support email** (now `support@example.com`), in `business.json` and WordPress Settings → Evenly
+- [x] **Support email** set to `support@evenlylife.com` (business.json + WordPress default). Confirm the domain is registered and the mailbox receives mail before launch.
+- [ ] Sleep formula decision: Supliful "Sleep Support" contains melatonin 10 mg, 5-HTP and St. John's Wort (interactions with antidepressants and hormonal birth control). Choose another formula, or update the site copy and warnings. Label artwork: `brand/labels/out/evenly-sleep-support-label.pdf`.
 - [ ] **Legal entity**, **mailing address** and **governing-law state** (placeholders in brackets)
 - [ ] **Manufacturing claims** ("Made in the USA", "cGMP"): hidden until the supplier confirms them for every product. Then set `manufacturing_claim_verified` to `true` / `1`.
 - [ ] Shipping promises (1–2 day processing, 3–5 day delivery) must match the supplier's real SLA

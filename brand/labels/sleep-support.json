@@ -1,0 +1,17 @@
+{
+  "_readme": "Label config for scripts/brand/build_label.py. Template: Supliful 'Sleep Support' (VOX4SLFR). Front-panel text comes from the template; regulatory panels are copied unchanged.",
+  "file": "evenly-sleep-support-label",
+  "left_clip": [10.5, 9.5, 147, 94.5],
+  "right_clip": [314, 10, 440, 170],
+  "front_x": [157, 305],
+  "main": "guava",
+  "accent": "mango",
+  "logo_top": 30,
+  "logo_width": 100,
+  "name": "SLEEP",
+  "name_size": 22,
+  "descriptor": "SLEEP SUPPORT FORMULA",
+  "claim": "Supports restful sleep*",
+  "identity_qty": "DIETARY SUPPLEMENT  ·  60 CAPSULES",
+  "responsible_party": ["[LEGAL ENTITY NAME - REQUIRED BEFORE PRINT]", "[FULL ADDRESS + PHONE OR EMAIL - REQUIRED]"]
+}
