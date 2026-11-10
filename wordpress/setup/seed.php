@@ -1,6 +1,6 @@
 <?php
 /**
- * Noon Night content seeder.
+ * Evenly content seeder.
  *
  * Imports concern hubs, products, bundles, pages, journal posts, menus and shipping
  * from wordpress/setup/data + wordpress/setup/content.
@@ -13,7 +13,7 @@
  *   NN_SEED_OVERWRITE=1 wp eval-file .../seed.php                      # also update existing items
  *   NN_SEED_FRESH_SITE=1 wp eval-file .../seed.php                     # new site: also set homepage, menus, permalinks, shipping
  *
- * @package NoonNight
+ * @package Evenly
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -124,19 +124,83 @@ foreach ( $data['concerns'] as $i => $concern ) {
 		update_term_meta( $term_id, 'rank_math_description', $meta['description'] ?? '' );
 		update_term_meta( $term_id, 'rank_math_title', $meta['seo_title'] ?? '' );
 	}
+	// Photo + color are design data, kept in sync on every run.
+	update_term_meta( $term_id, 'nn_image', $concern['image'] ?? '' );
+	update_term_meta( $term_id, 'nn_color', $concern['color'] ?? '' );
 	nn_seed_log( '  ✓ ' . $concern['name'] );
 }
 
 /* ---------------------------------------------------------------- 2. Products */
 nn_seed_log( '2/6 Products and bundles' );
-$all_products = array_merge( $data['products'], $data['bundles'] );
-foreach ( $all_products as $item ) {
+
+/**
+ * Import an image from the theme's assets/img into the Media Library once (re-used on later runs).
+ */
+function nn_seed_image( $file ) {
+	if ( ! $file ) {
+		return 0;
+	}
+	$existing = get_posts( array(
+		'post_type'   => 'attachment',
+		'post_status' => 'inherit',
+		'meta_key'    => '_ev_source',
+		'meta_value'  => $file,
+		'fields'      => 'ids',
+		'numberposts' => 1,
+	) );
+	if ( $existing ) {
+		return (int) $existing[0];
+	}
+	$path = get_theme_root() . '/evenly/assets/img/' . $file;
+	if ( ! file_exists( $path ) ) {
+		nn_seed_log( "  ! Image not found: $path" );
+		return 0;
+	}
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+	$upload = wp_upload_bits( $file, null, file_get_contents( $path ) ); // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+	if ( ! empty( $upload['error'] ) ) {
+		nn_seed_log( '  ! Upload failed: ' . $upload['error'] );
+		return 0;
+	}
+	$type = wp_check_filetype( $upload['file'] );
+	$id   = wp_insert_attachment( array(
+		'post_mime_type' => $type['type'],
+		'post_title'     => preg_replace( '/\.[^.]+$/', '', $file ),
+		'post_status'    => 'inherit',
+	), $upload['file'] );
+	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $upload['file'] ) );
+	update_post_meta( $id, '_ev_source', $file );
+	return (int) $id;
+}
+
+$concern_images = wp_list_pluck( $data['concerns'], 'image', 'slug' );
+$all_products   = array_merge( $data['products'], $data['bundles'] );
+foreach ( $all_products as $menu_order => $item ) {
 	$existing_id = wc_get_product_id_by_sku( $item['sku'] );
 	if ( $existing_id && ! $nn_overwrite ) {
-		nn_seed_log( '  - skip (exists) ' . $item['sku'] );
+		// Still attach photos to products created before images existed.
+		$existing = wc_get_product( $existing_id );
+		if ( $existing && ! $existing->get_image_id() && ! empty( $item['image'] ) ) {
+			$existing->set_image_id( nn_seed_image( $item['image'] ) );
+			$existing->save();
+			nn_seed_log( '  + photo for ' . $item['sku'] );
+		} else {
+			nn_seed_log( '  - skip (exists) ' . $item['sku'] );
+		}
 		continue;
 	}
 	$product = $existing_id ? wc_get_product( $existing_id ) : new WC_Product_Simple();
+	$product->set_menu_order( $menu_order );
+	if ( ! empty( $item['image'] ) ) {
+		$product->set_image_id( nn_seed_image( $item['image'] ) );
+	}
+	// Gallery: the lifestyle photo of the product's main concern + the lineup shot.
+	$gallery = array();
+	if ( empty( $item['includes'] ) ) {
+		$main = $concern_images[ $item['concerns'][0] ] ?? '';
+		$gallery = array_filter( array( nn_seed_image( $main ), nn_seed_image( 'lineup-960.webp' ) ) );
+	}
+	$product->set_gallery_image_ids( $gallery );
 	$product->set_name( $item['name'] );
 	$product->set_slug( $item['slug'] );
 	$product->set_sku( $item['sku'] );
@@ -294,7 +358,7 @@ if ( ! $nn_fresh ) {
 
 /* ---------------------------------------------------------------- 6. Fresh-site settings */
 nn_seed_log( '6/6 Fresh site: homepage, permalinks, menus, shipping' );
-update_option( 'blogname', 'Noon Night' );
+update_option( 'blogname', 'Evenly' );
 update_option( 'blogdescription', 'Supplements for sleep, period comfort and bloating' );
 update_option( 'woocommerce_default_country', 'US' );
 update_option( 'woocommerce_allowed_countries', 'specific' );

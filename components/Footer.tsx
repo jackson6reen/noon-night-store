@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FDA_DISCLAIMER, getBusiness, getConcerns } from "@/lib/site";
-import { Icon } from "./Icon";
+import { Icon, Logo } from "./Icon";
 import { PrivacyChoicesLink } from "./ConsentBanner";
 
 type L = { label: string; href: string };
@@ -42,8 +42,8 @@ export function Footer() {
         <div className="nn-container">
           <div className="nn-footer__grid">
             <div className="nn-footer__brand">
-              <p className="nn-footer__logo">Noon Night</p>
-              <p>Gentle, clean supplements for sleep, period comfort and bloating. Made for women who are done just pushing through.</p>
+              <p className="nn-footer__logo"><Logo size={34} /></p>
+              <p>Clean, honest formulas for sleep, cramps, bloating and stress. Made for women who are done just pushing through.</p>
               <p><a href={`mailto:${b.support_email}`}>{b.support_email}</a></p>
             </div>
             {col("Shop", shop)}

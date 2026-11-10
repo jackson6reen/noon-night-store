@@ -1,6 +1,6 @@
 # WordPress security checklist
 
-The `noon-night-core` plugin already handles the code-level items:
+The `evenly-core` plugin already handles the code-level items:
 - security headers (HSTS, nosniff, frame options, referrer, permissions)
 - XML-RPC off and X-Pingback removed
 - WordPress version hidden

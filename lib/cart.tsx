@@ -2,14 +2,29 @@
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 
-export type CartLine = { slug: string; sku: string; name: string; price: number; qty: number; line: string };
+export type CartLine = {
+  slug: string;
+  sku: string;
+  name: string;
+  price: number;
+  qty: number;
+  /** Accent color (label color of the bottle). */
+  line: string;
+  image?: string;
+  /** Bundles are already discounted, so they don't count toward "buy 2, get 1 free". */
+  isBundle?: boolean;
+};
 
 type CartCtx = {
   lines: CartLine[];
   count: number;
   subtotal: number;
+  /** Value of the free formulas (every 3rd single formula, cheapest first). */
+  discount: number;
+  freeCount: number;
+  total: number;
   ready: boolean;
-  add: (item: Omit<CartLine, "qty">, qty?: number) => void;
+  add: (item: Omit<CartLine, "qty">, qty?: number, openDrawer?: boolean) => void;
   setQty: (slug: string, qty: number) => void;
   remove: (slug: string) => void;
   clear: () => void;
@@ -18,9 +33,19 @@ type CartCtx = {
 };
 
 const Ctx = createContext<CartCtx | null>(null);
-const KEY = "noon-night-cart-v1";
+const KEY = "evenly-cart-v1";
 
-export function CartProvider({ children }: { children: React.ReactNode }) {
+/**
+ * Same rule as the WordPress plugin (evenly-core/includes/offer.php):
+ * for every 3 single formulas in the cart, the cheapest one is free.
+ */
+export function offerDiscount(lines: Pick<CartLine, "price" | "qty" | "isBundle">[]) {
+  const units = lines.filter((l) => !l.isBundle).flatMap((l) => Array(l.qty).fill(l.price) as number[]).sort((a, b) => a - b);
+  const freeCount = Math.floor(units.length / 3);
+  return { freeCount, discount: units.slice(0, freeCount).reduce((n, p) => n + p, 0) };
+}
+
+export function CartProvider({ children, offer = true }: { children: React.ReactNode; offer?: boolean }) {
   const [lines, setLines] = useState<CartLine[]>([]);
   const [ready, setReady] = useState(false);
   const [open, setOpen] = useState(false);
@@ -43,13 +68,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     } catch {}
   }, [lines, ready]);
 
-  const add = useCallback((item: Omit<CartLine, "qty">, qty = 1) => {
+  const add = useCallback((item: Omit<CartLine, "qty">, qty = 1, openDrawer = true) => {
     setLines((prev) => {
       const hit = prev.find((l) => l.slug === item.slug);
-      if (hit) return prev.map((l) => (l.slug === item.slug ? { ...l, qty: l.qty + qty } : l));
+      if (hit) return prev.map((l) => (l.slug === item.slug ? { ...l, ...item, qty: l.qty + qty } : l));
       return [...prev, { ...item, qty }];
     });
-    setOpen(true);
+    if (openDrawer) setOpen(true);
   }, []);
 
   const setQty = useCallback((slug: string, qty: number) => {
@@ -64,8 +89,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   const value = useMemo<CartCtx>(() => {
     const count = lines.reduce((n, l) => n + l.qty, 0);
     const subtotal = lines.reduce((n, l) => n + l.qty * l.price, 0);
-    return { lines, count, subtotal, ready, add, setQty, remove, clear, open, setOpen };
-  }, [lines, ready, add, setQty, remove, clear, open]);
+    const { discount, freeCount } = offer ? offerDiscount(lines) : { discount: 0, freeCount: 0 };
+    return { lines, count, subtotal, discount, freeCount, total: subtotal - discount, ready, add, setQty, remove, clear, open, setOpen };
+  }, [lines, ready, add, setQty, remove, clear, open, offer]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
@@ -76,7 +102,7 @@ export function useCart() {
   return c;
 }
 
-/** Builds the WooCommerce hand-off URL handled by the noon-night-bridge plugin. */
+/** WooCommerce hand-off URL, handled by the evenly-core plugin (includes/offer.php). */
 export function wooCheckoutUrl(base: string, lines: CartLine[]) {
   const items = lines.map((l) => `${encodeURIComponent(l.sku)}:${l.qty}`).join(",");
   return `${base}/?nn_cart=${items}`;

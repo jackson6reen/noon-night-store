@@ -1,7 +1,7 @@
 {
-  "_readme": "Business details for the Vercel preview. On WordPress these come from Settings > Noon Night (same keys). Keep both in sync.",
-  "business_name": "Noon Night",
-  "legal_entity": "[LEGAL ENTITY NAME, e.g. Noon Night LLC]",
+  "_readme": "Business details for the Vercel preview. On WordPress these come from Settings > Evenly (same keys). Keep both in sync.",
+  "business_name": "Evenly",
+  "legal_entity": "[LEGAL ENTITY NAME, e.g. Evenly LLC]",
   "address": "[BUSINESS MAILING ADDRESS]",
   "support_email": "support@example.com",
   "phone": "",
@@ -9,6 +9,8 @@
   "free_ship_min": 50,
   "flat_shipping": 5.95,
   "guarantee_days": 30,
-  "announcement": "Free US shipping over $50 · 30-day money-back guarantee",
-  "policy_updated": "2026-11-09"
+  "announcement": "Buy 2, get 1 free on every formula · Free US shipping over $50",
+  "policy_updated": "2026-11-09",
+  "offer_enabled": true,
+  "offer_label": "Buy 2, get 1 free"
 }

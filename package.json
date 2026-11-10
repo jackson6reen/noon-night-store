@@ -1,10 +1,13 @@
 {
-  "name": "noon-night-store",
-  "version": "0.2.0",
+  "name": "evenly-store",
+  "version": "0.3.0",
   "private": true,
   "scripts": {
+    "predev": "node scripts/sync-assets.mjs",
     "dev": "next dev",
+    "prebuild": "node scripts/sync-assets.mjs",
     "build": "next build",
+    "images": "node scripts/optimize-images.mjs",
     "start": "next start",
     "lint": "eslint"
   },
@@ -19,6 +22,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.4.5",
+    "sharp": "^0.34.4",
     "typescript": "^5"
   }
 }

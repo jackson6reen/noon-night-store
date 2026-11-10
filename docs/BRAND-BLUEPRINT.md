@@ -1,8 +1,8 @@
-# Noon Night: Buyer's Blueprint
+# Evenly: Buyer's Blueprint
 
 Filled in using the Master Prompt V1 framework (Buyer's Blueprint parts 1–3). The site copy on `/` and `/reset` is built from it.
 
-| Field | Noon Night |
+| Field | Evenly |
 |---|---|
 | **Niche** | Digestive + sleep supplements (the gut–sleep connection) |
 | **Avatar** | U.S. adults 35–65, mostly women 40+, desk jobs or busy households. Bloated most afternoons, "wired but tired" at night, already spending on antacids, gas pills and melatonin. |
@@ -27,7 +27,7 @@ Filled in using the Master Prompt V1 framework (Buyer's Blueprint parts 1–3). 
 
 | | |
 |---|---|
-| **Offer name** | The 24-Hour Reset |
+| **Offer name** | The Full Reset |
 | **Offer price** | $119 (worth $134 bought separately) |
 | **Guarantee** | The 30-Night Rest-Easy Guarantee: full refund on the first order, no return shipping |
 | **Bonus ideas (not built yet)** | "The Bloat-Free Plate" cheat sheet ($19) · "The 10-Minute Wind-Down" audio routine ($17) · "Gut–Sleep 30-Day Tracker" PDF ($12) |

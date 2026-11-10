@@ -46,7 +46,7 @@ export default async function DocPage({ params }: PageProps<"/[slug]">) {
           {d.category && <Link className="nn-eyebrow" href="/journal">{d.category}</Link>}
           <h1>{d.title}</h1>
           {d.excerpt && <p className="nn-lead">{d.excerpt}</p>}
-          <p className="nn-article__meta">By the Noon Night team · {readingTime(d.body)} min read</p>
+          <p className="nn-article__meta">By the Evenly team · {readingTime(d.body)} min read</p>
         </header>
         <div className="nn-prose nn-container nn-container--narrow">
           <div dangerouslySetInnerHTML={{ __html: d.body }} />

@@ -1,4 +1,4 @@
-/** Same icon set as wordpress/themes/noon-night/inc/icons.php */
+/** Same icon set as wordpress/themes/evenly/inc/icons.php */
 const PATHS: Record<string, string> = {
   moon: '<path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5Z"/>',
   drop: '<path d="M12 3s6 6.4 6 11a6 6 0 0 1-12 0c0-4.6 6-11 6-11Z"/>',
@@ -38,7 +38,21 @@ export function Icon({ name, size = 24 }: { name: string; size?: number }) {
   );
 }
 
-/** Drawn bottle shown until real product photos exist (same as nn_bottle_svg). */
+/** EVENLY logo: "=" mark (two even bars) + wordmark. Same as nn_logo() in the theme. */
+export function Logo({ size = 26 }: { size?: number }) {
+  return (
+    <>
+      <svg className="ev-mark" width={size} height={size} viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+        <rect width="32" height="32" rx="7" fill="#F0503F" />
+        <rect x="7" y="10" width="18" height="4" rx="2" fill="#fff" />
+        <rect x="7" y="18" width="18" height="4" rx="2" fill="#fff" />
+      </svg>
+      <span className="ev-wordmark">Evenly</span>
+    </>
+  );
+}
+
+/** Drawn bottle (fallback only, when a product has no photo). */
 export function Bottle({ label, accent = "#3B2A5A", bare = false }: { label: string; accent?: string; bare?: boolean }) {
   const text = label.replace(/:.*$/, "").slice(0, 18);
   return (
@@ -47,7 +61,7 @@ export function Bottle({ label, accent = "#3B2A5A", bare = false }: { label: str
       <rect x="112" y="40" width="76" height="34" rx="8" fill="#231B33" />
       <rect x="92" y="70" width="116" height="190" rx="26" fill="#fff" stroke="#231B33" strokeWidth="3" />
       <rect x="92" y="128" width="116" height="78" fill={accent} />
-      <text x="150" y="160" textAnchor="middle" fontFamily="Georgia,serif" fontSize="15" fill="#fff">NOON NIGHT</text>
+      <text x="150" y="160" textAnchor="middle" fontFamily="Georgia,serif" fontSize="15" fill="#fff">EVENLY</text>
       <text x="150" y="184" textAnchor="middle" fontFamily="Arial,sans-serif" fontSize="11" fill="#fff">{text}</text>
     </svg>
   );

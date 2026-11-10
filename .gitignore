@@ -42,3 +42,6 @@ next-env.d.ts
 
 .vercel
 .env*
+
+# synced from wordpress/themes/evenly/assets/img by scripts/sync-assets.mjs
+/public/img/

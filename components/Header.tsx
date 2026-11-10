@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/lib/cart";
-import { Icon } from "./Icon";
+import { Icon, Logo } from "./Icon";
 
 export function Header({ nav, announcement }: { nav: { label: string; href: string }[]; announcement: string }) {
   const [open, setOpen] = useState(false);
@@ -31,7 +31,7 @@ export function Header({ nav, announcement }: { nav: { label: string; href: stri
             <Icon name="menu" />
             <span className="screen-reader-text">Menu</span>
           </button>
-          <div className="nn-logo"><Link href="/" rel="home">Noon Night</Link></div>
+          <div className="nn-logo"><Link href="/" rel="home" aria-label="Evenly home"><Logo /></Link></div>
           <nav id="nn-nav" ref={navRef} className={`nn-nav${open ? " is-open" : ""}`} aria-label="Main">
             <ul>
               {nav.map((item) => (

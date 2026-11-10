@@ -1,8 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { bundleInfo, FDA_DISCLAIMER, getBusiness, getConcern, getProduct, getProducts, toCard } from "@/lib/site";
-import { Bottle } from "@/components/Icon";
+import { bundleInfo, FDA_DISCLAIMER, getBusiness, getConcern, getOffer, getProduct, getProducts, img, toCard } from "@/lib/site";
 import { AddToCartForm } from "@/components/AddToCart";
 import { ProductTabs } from "@/components/ProductTabs";
 import { ProductGrid, usd } from "@/components/ProductGrid";
@@ -20,7 +19,7 @@ export async function generateMetadata({ params }: PageProps<"/product/[slug]">)
   return p ? { title: p.name, description: p.short } : {};
 }
 
-/** Mirrors the WooCommerce single product + noon-night-core product fields and tabs. */
+/** Mirrors the WooCommerce single product + evenly-core product fields and tabs. */
 export default async function ProductPage({ params }: PageProps<"/product/[slug]">) {
   const { slug } = await params;
   const p = getProduct(slug);
@@ -30,6 +29,8 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
   const bundle = p.isBundle ? bundleInfo(p) : null;
   const cats = p.concerns.map(getConcern).filter(Boolean);
   const primary = cats[0];
+  const offer = getOffer();
+  const lifestyle = (primary && primary.slug !== "bundles" ? primary : cats.find((c) => c && c.slug !== "bundles")) ?? primary;
   const related = getProducts().filter((x) => x.slug !== p.slug && x.concerns.some((c) => p.concerns.includes(c))).slice(0, 3).map(toCard);
 
   const tabs = [
@@ -61,7 +62,7 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
     name: p.name,
     sku: p.sku,
     description: p.short,
-    brand: { "@type": "Brand", name: "Noon Night" },
+    brand: { "@type": "Brand", name: "Evenly" },
     offers: { "@type": "Offer", price: p.price.toFixed(2), priceCurrency: "USD", availability: "https://schema.org/InStock" },
   };
 
@@ -75,7 +76,12 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
         </nav>
         <div className="product">
           <div className="woocommerce-product-gallery">
-            <div className="woocommerce-product-gallery__image--placeholder"><span className="nn-placeholder"><Bottle label={p.name} accent={card.accent} /></span></div>
+            <div className="ev-gallery">
+              <img src={card.image} alt={p.name} width={1000} height={1000} fetchPriority="high" />
+              {bundle?.items.slice(0, 2).map((i) => <img key={i.sku} src={img(i.image)} alt={i.name} width={500} height={500} loading="lazy" />)}
+              {!bundle && lifestyle && <img src={img(lifestyle.image)} alt="" width={500} height={500} loading="lazy" />}
+              {!bundle && <img src={img("lineup-960.webp")} alt="The Evenly range" width={500} height={500} loading="lazy" />}
+            </div>
           </div>
           <div className="summary entry-summary">
             <h1 className="product_title entry-title">{p.name}</h1>
@@ -91,6 +97,9 @@ export default async function ProductPage({ params }: PageProps<"/product/[slug]
             )}
             {p.format && <p className="nn-format">{p.format}</p>}
             <div className="woocommerce-product-details__short-description"><p>{p.short}</p></div>
+            {!p.isBundle && offer.enabled && (
+              <p className="ev-offer-note"><span className="nn-badge">{offer.label}</span> <span>Add any 3 formulas and <strong>the cheapest is free</strong>. Applied in your cart.</span></p>
+            )}
             <AddToCartForm product={card} priceLabel={usd(p.price)} />
             <ul className="nn-trust-row">
               <li>{b.guarantee_days}-day money-back guarantee</li>

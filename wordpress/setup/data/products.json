@@ -1,5 +1,5 @@
 {
-  "_readme": "Single source of truth for the WooCommerce catalog. seed.php imports it. 'supplier' maps each product to the Supliful catalog item. 'label_verified: false' means doses/counts must be checked against the supplier's real label before launch.",
+  "_readme": "Single source of truth for the WooCommerce catalog. seed.php imports it. 'supplier' maps each product to the Supliful catalog item. 'label_verified: false' means doses/counts must be checked against the supplier's real label before launch. 'image' files live in wordpress/themes/evenly/assets/img/.",
   "concerns": [
     {
       "slug": "sleep",
@@ -8,7 +8,9 @@
       "icon": "moon",
       "headline": "Supplements for sleep that don't leave you groggy",
       "tagline": "For the 2 a.m. ceiling stare.",
-      "content_file": "concerns/sleep.html"
+      "content_file": "concerns/sleep.html",
+      "image": "l-sleep.webp",
+      "color": "#4B2BB8"
     },
     {
       "slug": "period-comfort",
@@ -17,7 +19,9 @@
       "icon": "drop",
       "headline": "Natural support for period cramps, PMS and cycle bloating",
       "tagline": "For the days your cycle runs your calendar.",
-      "content_file": "concerns/period-comfort.html"
+      "content_file": "concerns/period-comfort.html",
+      "image": "l-cycle.webp",
+      "color": "#F0503F"
     },
     {
       "slug": "bloating-gut",
@@ -26,7 +30,9 @@
       "icon": "leaf",
       "headline": "Supplements for bloating and gas that work with your meals",
       "tagline": "For the 3 p.m. button-pop.",
-      "content_file": "concerns/bloating-gut.html"
+      "content_file": "concerns/bloating-gut.html",
+      "image": "l-gut.webp",
+      "color": "#3E9B2F"
     },
     {
       "slug": "stress-calm",
@@ -35,7 +41,9 @@
       "icon": "wave",
       "headline": "Everyday stress support for wired-but-tired days",
       "tagline": "For when your mind won't clock out.",
-      "content_file": "concerns/stress-calm.html"
+      "content_file": "concerns/stress-calm.html",
+      "image": "l-calm.webp",
+      "color": "#E5951A"
     },
     {
       "slug": "bundles",
@@ -44,15 +52,21 @@
       "icon": "gift",
       "headline": "Relief kits: the routines our customers stick with",
       "tagline": "Save up to 18% when you pair them.",
-      "content_file": "concerns/bundles.html"
+      "content_file": "concerns/bundles.html",
+      "image": "lineup.webp",
+      "color": "#0B0B0C"
     }
   ],
   "products": [
     {
-      "sku": "NN-NIGHT-CALM",
-      "slug": "night-calm-magnesium-glycinate",
-      "name": "Night Calm: Magnesium Glycinate",
-      "concerns": ["sleep", "period-comfort", "stress-calm"],
+      "sku": "EV-UNWIND",
+      "slug": "evenly-unwind-magnesium-glycinate",
+      "name": "Evenly Unwind: Magnesium Glycinate",
+      "concerns": [
+        "sleep",
+        "period-comfort",
+        "stress-calm"
+      ],
       "price": 29,
       "format": "120 capsules · 60 servings",
       "tagline": "The gentle magnesium for tight muscles, cramps and a busy brain at night.",
@@ -65,26 +79,48 @@
       ],
       "how_to_use": "Take 2 capsules with water 30–60 minutes before bed. Around your period, many women take it every day of the cycle.",
       "ingredients": [
-        ["Magnesium (as magnesium bisglycinate chelate)", "Confirm on label", "Supports muscle relaxation and nervous-system calm"]
+        [
+          "Magnesium (as magnesium bisglycinate chelate)",
+          "Confirm on label",
+          "Supports muscle relaxation and nervous-system calm"
+        ]
       ],
       "warnings": "Do not exceed the recommended dose. If you have kidney disease, are pregnant or nursing, or take antibiotics, bisphosphonates or blood-pressure medication, ask your doctor before use. Keep out of reach of children.",
       "faq": [
-        ["Will magnesium glycinate make me groggy?", "It isn't a sedative. Most people describe it as feeling physically \"unwound\" rather than drugged, and wake up clear."],
-        ["Can I take it for period cramps?", "Magnesium supports normal muscle relaxation, and many women take it daily through their cycle for comfort.* If cramps are severe or getting worse, see your doctor."],
-        ["Can I take it with Night Deep Rest?", "Yes. That pairing is The Night Reset bundle."]
+        [
+          "Will magnesium glycinate make me groggy?",
+          "It isn't a sedative. Most people describe it as feeling physically \"unwound\" rather than drugged, and wake up clear."
+        ],
+        [
+          "Can I take it for period cramps?",
+          "Magnesium supports normal muscle relaxation, and many women take it daily through their cycle for comfort.* If cramps are severe or getting worse, see your doctor."
+        ],
+        [
+          "Can I take it with Evenly Sleep?",
+          "Yes. That pairing is The Sleep Stack bundle."
+        ]
       ],
-      "supplier": {"name": "Supliful", "item": "Magnesium Glycinate (verify in catalog)", "label_verified": false}
+      "supplier": {
+        "name": "Supliful",
+        "item": "Magnesium Glycinate (verify in catalog)",
+        "label_verified": false
+      },
+      "image": "p-unwind.webp",
+      "color": "#2338C9",
+      "short_name": "Unwind"
     },
     {
-      "sku": "NN-NIGHT-REST",
-      "slug": "night-deep-rest-sleep-gummies",
-      "name": "Night Deep Rest: Low-Dose Sleep Formula",
-      "concerns": ["sleep"],
+      "sku": "EV-SLEEP",
+      "slug": "evenly-sleep-low-dose-sleep-formula",
+      "name": "Evenly Sleep: Low-Dose Sleep Formula",
+      "concerns": [
+        "sleep"
+      ],
       "price": 29,
       "format": "60 servings",
       "tagline": "Fall asleep faster and wake up clear, not foggy.",
       "short": "A low-dose melatonin formula with calming botanicals to help you fall asleep and stay asleep, without the next-morning fog.*",
-      "description": "<p>Most drugstore melatonin comes in 5–10 mg doses, far more than research suggests most people need. That's a big reason people wake up groggy and give up on it.</p><p>Night Deep Rest keeps melatonin low and pairs it with gentle calming botanicals. It's built for the nights you lie there with your mind racing, and for the 3 a.m. wake-ups.</p>",
+      "description": "<p>Most drugstore melatonin comes in 5–10 mg doses, far more than research suggests most people need. That's a big reason people wake up groggy and give up on it.</p><p>Evenly Sleep keeps melatonin low and pairs it with gentle calming botanicals. It's built for the nights you lie there with your mind racing, and for the 3 a.m. wake-ups.</p>",
       "benefits": [
         "Helps you fall asleep faster*",
         "Supports staying asleep through the night*",
@@ -92,26 +128,49 @@
       ],
       "how_to_use": "Take 1 serving 30 minutes before bed. Not for daily use longer than recommended on the label. Do not drive after taking.",
       "ingredients": [
-        ["Melatonin", "Confirm on label", "Signals to your body that it's time to sleep"],
-        ["Calming botanical blend", "Confirm on label", "Supports relaxation"]
+        [
+          "Melatonin",
+          "Confirm on label",
+          "Signals to your body that it's time to sleep"
+        ],
+        [
+          "Calming botanical blend",
+          "Confirm on label",
+          "Supports relaxation"
+        ]
       ],
       "warnings": "For adults 18+. Do not take if pregnant, nursing, or trying to conceive. Ask your doctor before use if you take sedatives, antidepressants, blood thinners, immunosuppressants, diabetes or blood-pressure medication, or have an autoimmune or seizure condition. May cause drowsiness. Do not drive or operate machinery after use.",
       "faq": [
-        ["Is it habit-forming?", "Melatonin isn't considered habit-forming, and we keep the dose low on purpose. Use it for occasional sleeplessness, along with good wind-down habits."],
-        ["Why low-dose?", "More melatonin isn't better. Lower doses are associated with less next-day grogginess."]
+        [
+          "Is it habit-forming?",
+          "Melatonin isn't considered habit-forming, and we keep the dose low on purpose. Use it for occasional sleeplessness, along with good wind-down habits."
+        ],
+        [
+          "Why low-dose?",
+          "More melatonin isn't better. Lower doses are associated with less next-day grogginess."
+        ]
       ],
-      "supplier": {"name": "Supliful", "item": "Sleep formula (Sleep & Relaxation category, verify)", "label_verified": false}
+      "supplier": {
+        "name": "Supliful",
+        "item": "Sleep formula (Sleep & Relaxation category, verify)",
+        "label_verified": false
+      },
+      "image": "p-sleep.webp",
+      "color": "#4B2BB8",
+      "short_name": "Sleep"
     },
     {
-      "sku": "NN-CYCLE-EASE",
-      "slug": "cycle-ease-womens-balance",
-      "name": "Cycle Ease: Women's Balance Formula",
-      "concerns": ["period-comfort"],
+      "sku": "EV-CYCLE",
+      "slug": "evenly-cycle-womens-balance",
+      "name": "Evenly Cycle: Women's Balance Formula",
+      "concerns": [
+        "period-comfort"
+      ],
       "price": 36,
       "format": "60 capsules · 30 servings",
       "tagline": "Chasteberry, black cohosh and dong quai for a calmer cycle.",
       "short": "A traditional botanical formula with chasteberry (vitex), black cohosh and dong quai to support hormonal balance and menstrual comfort, every day of your cycle.*",
-      "description": "<p>PMS can feel like a monthly tax: mood swings, tender breasts, bloating, cramps, and the feeling that your body isn't on your side for a week.</p><p>Cycle Ease combines botanicals women have used for generations. <strong>Chasteberry (vitex)</strong> is one of the most studied herbs for premenstrual comfort. Black cohosh, dong quai, red clover and sage round out the blend. It isn't a painkiller you grab on day one. It's a daily formula that builds over 2–3 cycles.</p>",
+      "description": "<p>PMS can feel like a monthly tax: mood swings, tender breasts, bloating, cramps, and the feeling that your body isn't on your side for a week.</p><p>Evenly Cycle combines botanicals women have used for generations. <strong>Chasteberry (vitex)</strong> is one of the most studied herbs for premenstrual comfort. Black cohosh, dong quai, red clover and sage round out the blend. It isn't a painkiller you grab on day one. It's a daily formula that builds over 2–3 cycles.</p>",
       "benefits": [
         "Supports hormonal balance throughout the cycle*",
         "Helps ease occasional PMS discomfort, including mood changes and breast tenderness*",
@@ -119,32 +178,79 @@
       ],
       "how_to_use": "Take 2 capsules daily with food. Give it 2–3 full cycles to judge how it works for you.",
       "ingredients": [
-        ["Chasteberry (Vitex agnus-castus) fruit extract", "50 mg", "The most-studied herb for premenstrual comfort"],
-        ["Black cohosh root", "160 mg", "Traditionally used for female hormonal balance"],
-        ["Dong quai root", "150 mg", "Traditionally used in women's herbal formulas"],
-        ["Red clover", "400 mg", "Plant isoflavones"],
-        ["Sage leaf", "200 mg", "Traditional women's herb"],
-        ["Wild yam root", "15 mg", "Traditional women's herb"],
-        ["Soy isoflavones", "30 mg", "Plant isoflavones"]
+        [
+          "Chasteberry (Vitex agnus-castus) fruit extract",
+          "50 mg",
+          "The most-studied herb for premenstrual comfort"
+        ],
+        [
+          "Black cohosh root",
+          "160 mg",
+          "Traditionally used for female hormonal balance"
+        ],
+        [
+          "Dong quai root",
+          "150 mg",
+          "Traditionally used in women's herbal formulas"
+        ],
+        [
+          "Red clover",
+          "400 mg",
+          "Plant isoflavones"
+        ],
+        [
+          "Sage leaf",
+          "200 mg",
+          "Traditional women's herb"
+        ],
+        [
+          "Wild yam root",
+          "15 mg",
+          "Traditional women's herb"
+        ],
+        [
+          "Soy isoflavones",
+          "30 mg",
+          "Plant isoflavones"
+        ]
       ],
       "warnings": "Do not use if pregnant, nursing or trying to conceive, or if you use hormonal birth control or hormone therapy. Do not use if you have, or have had, a hormone-sensitive condition (such as breast, uterine or ovarian cancer, endometriosis or fibroids), liver disease, or a bleeding disorder, or if you take blood thinners. Ask your doctor before use. Stop and see a doctor if you have abdominal pain, dark urine or yellowing of the skin or eyes.",
       "faq": [
-        ["How fast does it work?", "Botanical cycle formulas work gradually. Most women judge it after 2–3 full cycles of daily use.*"],
-        ["Can I take it on birth control?", "No. Please don't combine it with hormonal birth control or hormone therapy without your doctor's OK."],
-        ["Is this for menopause?", "It's formulated for menstrual-cycle support. If you're in perimenopause, talk to your doctor about what fits."]
+        [
+          "How fast does it work?",
+          "Botanical cycle formulas work gradually. Most women judge it after 2–3 full cycles of daily use.*"
+        ],
+        [
+          "Can I take it on birth control?",
+          "No. Please don't combine it with hormonal birth control or hormone therapy without your doctor's OK."
+        ],
+        [
+          "Is this for menopause?",
+          "It's formulated for menstrual-cycle support. If you're in perimenopause, talk to your doctor about what fits."
+        ]
       ],
-      "supplier": {"name": "Supliful", "item": "Women's Vitality Formula (60 capsules)", "label_verified": true}
+      "supplier": {
+        "name": "Supliful",
+        "item": "Women's Vitality Formula (60 capsules)",
+        "label_verified": true
+      },
+      "image": "p-cycle.webp",
+      "color": "#F0503F",
+      "short_name": "Cycle"
     },
     {
-      "sku": "NN-NOON-DIGEST",
-      "slug": "noon-digest-digestive-enzymes",
-      "name": "Noon Digest: Digestive Enzymes",
-      "concerns": ["bloating-gut", "period-comfort"],
+      "sku": "EV-DIGEST",
+      "slug": "evenly-digest-digestive-enzymes",
+      "name": "Evenly Digest: Digestive Enzymes",
+      "concerns": [
+        "bloating-gut",
+        "period-comfort"
+      ],
       "price": 34,
       "format": "60 capsules · 30 days",
       "tagline": "Take it with your first bite, so lunch doesn't come back at 3 p.m.",
       "short": "A broad-spectrum digestive enzyme blend taken with meals to help break down food and relieve occasional gas and bloating.*",
-      "description": "<p>You eat a normal lunch, and by mid-afternoon your waistband is fighting you. Often the problem is food that isn't fully broken down, so it ferments into gas instead.</p><p>Noon Digest delivers a full-spectrum enzyme blend (Makzyme-Pro) with your meal to help break down protein, fats and carbohydrates. Many women find it especially useful in the bloated days before their period.</p>",
+      "description": "<p>You eat a normal lunch, and by mid-afternoon your waistband is fighting you. Often the problem is food that isn't fully broken down, so it ferments into gas instead.</p><p>Evenly Digest delivers a full-spectrum enzyme blend (Makzyme-Pro) with your meal to help break down protein, fats and carbohydrates. Many women find it especially useful in the bloated days before their period.</p>",
       "benefits": [
         "Helps break down protein, fats and carbohydrates*",
         "Helps relieve occasional gas and bloating after meals*",
@@ -152,25 +258,44 @@
       ],
       "how_to_use": "Take 1 capsule with the first bite of your two largest meals.",
       "ingredients": [
-        ["Makzyme-Pro digestive enzyme blend", "400 mg", "Broad-spectrum enzymes incl. protease (2,500 HUT)"]
+        [
+          "Makzyme-Pro digestive enzyme blend",
+          "400 mg",
+          "Broad-spectrum enzymes incl. protease (2,500 HUT)"
+        ]
       ],
       "warnings": "Ask your doctor before use if you are pregnant or nursing, take blood thinners, or have a stomach ulcer or digestive condition. Discontinue if you experience discomfort.",
       "faq": [
-        ["When do I take it?", "Right as you start eating. Enzymes need to meet the food."],
-        ["Will it help with period bloating?", "Pre-period bloating is partly water retention and partly slower digestion. Noon Digest supports the digestion side.*"]
+        [
+          "When do I take it?",
+          "Right as you start eating. Enzymes need to meet the food."
+        ],
+        [
+          "Will it help with period bloating?",
+          "Pre-period bloating is partly water retention and partly slower digestion. Evenly Digest supports the digestion side.*"
+        ]
       ],
-      "supplier": {"name": "Supliful", "item": "Digestive Enzyme Pro Blend (60 capsules)", "label_verified": true}
+      "supplier": {
+        "name": "Supliful",
+        "item": "Digestive Enzyme Pro Blend (60 capsules)",
+        "label_verified": true
+      },
+      "image": "p-digest.webp",
+      "color": "#3E9B2F",
+      "short_name": "Digest"
     },
     {
-      "sku": "NN-NOON-FLORA",
-      "slug": "noon-flora-probiotic-40-billion",
-      "name": "Noon Flora: Probiotic 40 Billion",
-      "concerns": ["bloating-gut"],
+      "sku": "EV-FLORA",
+      "slug": "evenly-flora-probiotic-40-billion",
+      "name": "Evenly Flora: Probiotic 40 Billion",
+      "concerns": [
+        "bloating-gut"
+      ],
       "price": 39,
       "format": "60 capsules · 30 days",
       "tagline": "40 billion CFU with prebiotics, for a calmer, more regular gut.",
       "short": "A daily probiotic with 40 billion CFU plus prebiotic fiber to support a balanced gut, regularity and digestive comfort.*",
-      "description": "<p>Antibiotics, stress, travel, takeout and hormonal shifts can all throw your gut bacteria off balance, and you feel it as bloating and irregularity.</p><p>Noon Flora delivers 40 billion CFU across well-studied strains, plus FOS prebiotic fiber that feeds them.</p>",
+      "description": "<p>Antibiotics, stress, travel, takeout and hormonal shifts can all throw your gut bacteria off balance, and you feel it as bloating and irregularity.</p><p>Evenly Flora delivers 40 billion CFU across well-studied strains, plus FOS prebiotic fiber that feeds them.</p>",
       "benefits": [
         "Supports a balanced gut microbiome*",
         "Supports regularity and digestive comfort*",
@@ -178,21 +303,44 @@
       ],
       "how_to_use": "Take 2 capsules daily with water, ideally in the morning.",
       "ingredients": [
-        ["Probiotic blend (4 strains)", "40 billion CFU", "Supports gut balance"],
-        ["Fructooligosaccharides (FOS)", "24 mg", "Prebiotic fiber that feeds good bacteria"]
+        [
+          "Probiotic blend (4 strains)",
+          "40 billion CFU",
+          "Supports gut balance"
+        ],
+        [
+          "Fructooligosaccharides (FOS)",
+          "24 mg",
+          "Prebiotic fiber that feeds good bacteria"
+        ]
       ],
       "warnings": "Ask your doctor before use if you are immunocompromised, critically ill, pregnant or nursing. Mild gas in the first days is common as your gut adjusts.",
       "faq": [
-        ["Do I need to refrigerate it?", "Follow the storage directions on the label. Keep it in a cool, dry place."],
-        ["I feel a bit gassy the first week. Normal?", "Yes, that's common while your gut adjusts. It usually settles within a week or two."]
+        [
+          "Do I need to refrigerate it?",
+          "Follow the storage directions on the label. Keep it in a cool, dry place."
+        ],
+        [
+          "I feel a bit gassy the first week. Normal?",
+          "Yes, that's common while your gut adjusts. It usually settles within a week or two."
+        ]
       ],
-      "supplier": {"name": "Supliful", "item": "Probiotic 40 Billion with Prebiotics (60 capsules)", "label_verified": true}
+      "supplier": {
+        "name": "Supliful",
+        "item": "Probiotic 40 Billion with Prebiotics (60 capsules)",
+        "label_verified": true
+      },
+      "image": "p-flora.webp",
+      "color": "#0E8A7E",
+      "short_name": "Flora"
     },
     {
-      "sku": "NN-NIGHT-RESTORE",
-      "slug": "night-restore-l-glutamine",
-      "name": "Night Restore: L-Glutamine Powder",
-      "concerns": ["bloating-gut"],
+      "sku": "EV-RESTORE",
+      "slug": "evenly-restore-l-glutamine",
+      "name": "Evenly Restore: L-Glutamine Powder",
+      "concerns": [
+        "bloating-gut"
+      ],
       "price": 35,
       "format": "98 g powder · about 30 servings",
       "tagline": "Unflavored gut-lining support you stir into evening tea.",
@@ -205,24 +353,41 @@
       ],
       "how_to_use": "Mix 1 scoop (3.3 g) into water or herbal tea once daily, in the evening.",
       "ingredients": [
-        ["L-Glutamine", "3.15 g per serving", "Fuel for the cells lining the gut"]
+        [
+          "L-Glutamine",
+          "3.15 g per serving",
+          "Fuel for the cells lining the gut"
+        ]
       ],
       "warnings": "Do not use if you have liver or kidney disease, or a history of seizures or bipolar disorder, unless your doctor approves. Ask your doctor before use if pregnant or nursing.",
       "faq": [
-        ["Does it taste like anything?", "It's unflavored. Most people don't notice it in tea or water."]
+        [
+          "Does it taste like anything?",
+          "It's unflavored. Most people don't notice it in tea or water."
+        ]
       ],
-      "supplier": {"name": "Supliful", "item": "L-Glutamine (98 g powder)", "label_verified": true}
+      "supplier": {
+        "name": "Supliful",
+        "item": "L-Glutamine (98 g powder)",
+        "label_verified": true
+      },
+      "image": "p-restore.webp",
+      "color": "#E8708F",
+      "short_name": "Restore"
     },
     {
-      "sku": "NN-NOON-STEADY",
-      "slug": "noon-steady-ashwagandha",
-      "name": "Noon Steady: Ashwagandha",
-      "concerns": ["stress-calm", "sleep"],
+      "sku": "EV-CALM",
+      "slug": "evenly-calm-ashwagandha",
+      "name": "Evenly Calm: Ashwagandha",
+      "concerns": [
+        "stress-calm",
+        "sleep"
+      ],
       "price": 32,
       "format": "60 capsules · 30 days",
       "tagline": "Take the edge off busy days, so you're not still wound up at bedtime.",
       "short": "KSM-66 ashwagandha, the most-studied adaptogen for everyday stress, to support calm focus by day and an easier wind-down at night.*",
-      "description": "<p>Bad nights often start at noon: the inbox, the kids, the cortisol spike that never quite comes down. Noon Steady uses <strong>KSM-66 ashwagandha root extract</strong> to help your body handle everyday stress, so your evening wind-down comes easier.</p>",
+      "description": "<p>Bad nights often start at noon: the inbox, the kids, the cortisol spike that never quite comes down. Evenly Calm uses <strong>KSM-66 ashwagandha root extract</strong> to help your body handle everyday stress, so your evening wind-down comes easier.</p>",
       "benefits": [
         "Helps the body adapt to everyday stress*",
         "Supports a calm, balanced mood*",
@@ -230,58 +395,97 @@
       ],
       "how_to_use": "Take 2 capsules daily with food.",
       "ingredients": [
-        ["Ashwagandha root extract (KSM-66)", "600 mg", "Adaptogen for everyday stress"]
+        [
+          "Ashwagandha root extract (KSM-66)",
+          "600 mg",
+          "Adaptogen for everyday stress"
+        ]
       ],
       "warnings": "Do not use if pregnant or nursing. Ask your doctor before use if you have a thyroid, liver or autoimmune condition, or take thyroid medication, sedatives, immunosuppressants, diabetes or blood-pressure medication. Stop use if you notice signs of liver problems.",
       "faq": [
-        ["Will it make me sleepy during the day?", "Ashwagandha isn't a sedative. Most people feel steadier, not drowsy."]
+        [
+          "Will it make me sleepy during the day?",
+          "Ashwagandha isn't a sedative. Most people feel steadier, not drowsy."
+        ]
       ],
-      "supplier": {"name": "Supliful", "item": "Ashwagandha (plain) or Ashwagandha Plus (verify which)", "label_verified": false}
+      "supplier": {
+        "name": "Supliful",
+        "item": "Ashwagandha (plain) or Ashwagandha Plus (verify which)",
+        "label_verified": false
+      },
+      "image": "p-calm.webp",
+      "color": "#E5951A",
+      "short_name": "Calm"
     }
   ],
   "bundles": [
     {
-      "sku": "NN-BUNDLE-CYCLE",
-      "slug": "cycle-comfort-kit",
-      "name": "The Cycle Comfort Kit",
-      "concerns": ["bundles", "period-comfort"],
-      "price": 85,
-      "includes": ["NN-CYCLE-EASE", "NN-NIGHT-CALM", "NN-NOON-DIGEST"],
+      "sku": "EV-KIT-CYCLE",
+      "slug": "the-cycle-kit",
+      "name": "The Cycle Kit",
+      "concerns": [
+        "bundles",
+        "period-comfort"
+      ],
+      "price": 70,
+      "includes": [
+        "EV-CYCLE",
+        "EV-UNWIND",
+        "EV-DIGEST"
+      ],
       "tagline": "Cramps, PMS and period bloating, handled from three sides.",
-      "short": "Cycle Ease for hormonal balance, Night Calm magnesium for muscle comfort and sleep, and Noon Digest for pre-period bloating. Our most complete cycle routine.*",
+      "short": "Evenly Cycle for hormonal balance, Evenly Unwind magnesium for muscle comfort and sleep, and Evenly Digest for pre-period bloating. Our most complete cycle routine.*",
       "description": "<p>Period discomfort rarely comes alone. Cramps, mood, bloating and bad sleep all pile up in the same week. This kit supports all of it, every day of your cycle, so the hard week gets easier over time.</p>",
       "benefits": [
-        "Daily: Cycle Ease supports hormonal balance*",
-        "Evening: Night Calm supports muscle relaxation and sleep*",
-        "With meals: Noon Digest helps relieve occasional bloating*",
-        "Save $14 compared with buying separately"
+        "Daily: Evenly Cycle supports hormonal balance*",
+        "Evening: Evenly Unwind supports muscle relaxation and sleep*",
+        "With meals: Evenly Digest helps relieve occasional bloating*",
+        "Save $29: one formula is free"
       ],
-      "how_to_use": "Morning: 2 Cycle Ease with breakfast. Meals: 1 Noon Digest with your two largest meals. Evening: 2 Night Calm before bed."
+      "how_to_use": "Morning: 2 Evenly Cycle with breakfast. Meals: 1 Evenly Digest with your two largest meals. Evening: 2 Evenly Unwind before bed.",
+      "image": "k-cycle.webp",
+      "color": "#F0503F",
+      "short_name": "Cycle Kit"
     },
     {
-      "sku": "NN-BUNDLE-NIGHT",
-      "slug": "the-night-reset",
-      "name": "The Night Reset",
-      "concerns": ["bundles", "sleep"],
+      "sku": "EV-KIT-SLEEP",
+      "slug": "the-sleep-stack",
+      "name": "The Sleep Stack",
+      "concerns": [
+        "bundles",
+        "sleep"
+      ],
       "price": 49,
-      "includes": ["NN-NIGHT-CALM", "NN-NIGHT-REST"],
+      "includes": [
+        "EV-UNWIND",
+        "EV-SLEEP"
+      ],
       "tagline": "Body unwinds, mind switches off.",
-      "short": "Night Calm magnesium relaxes the body; Night Deep Rest helps you fall asleep. The two-step bedtime routine.*",
-      "description": "<p>Most sleep products only work on one thing. The Night Reset relaxes your body with magnesium glycinate and signals your brain that it's time to sleep with low-dose melatonin and calming botanicals.</p>",
+      "short": "Evenly Unwind magnesium relaxes the body; Evenly Sleep helps you fall asleep. The two-step bedtime routine.*",
+      "description": "<p>Most sleep products only work on one thing. The Sleep Stack relaxes your body with magnesium glycinate and signals your brain that it's time to sleep with low-dose melatonin and calming botanicals.</p>",
       "benefits": [
         "Supports falling asleep and staying asleep*",
         "Supports muscle relaxation*",
         "Save $9 compared with buying separately"
       ],
-      "how_to_use": "60 minutes before bed: 2 Night Calm. 30 minutes before bed: 1 serving Night Deep Rest."
+      "how_to_use": "60 minutes before bed: 2 Evenly Unwind. 30 minutes before bed: 1 serving Evenly Sleep.",
+      "image": "k-sleep.webp",
+      "color": "#4B2BB8",
+      "short_name": "Sleep Stack"
     },
     {
-      "sku": "NN-BUNDLE-GUT",
-      "slug": "calm-gut-bundle",
-      "name": "The Calm Gut Bundle",
-      "concerns": ["bundles", "bloating-gut"],
+      "sku": "EV-KIT-GUT",
+      "slug": "the-gut-reset",
+      "name": "The Gut Reset",
+      "concerns": [
+        "bundles",
+        "bloating-gut"
+      ],
       "price": 62,
-      "includes": ["NN-NOON-DIGEST", "NN-NOON-FLORA"],
+      "includes": [
+        "EV-DIGEST",
+        "EV-FLORA"
+      ],
       "tagline": "Break food down, keep your gut balanced.",
       "short": "Digestive enzymes with meals plus a 40-billion-CFU daily probiotic, for less bloating and more regularity.*",
       "description": "<p>Enzymes help break food down at the meal. The probiotic supports the gut bacteria that handle what's left. Together they cover both ends of everyday bloating.</p>",
@@ -290,24 +494,39 @@
         "Supports regularity and gut balance*",
         "Save $11 compared with buying separately"
       ],
-      "how_to_use": "Morning: 2 Noon Flora. Meals: 1 Noon Digest with your two largest meals."
+      "how_to_use": "Morning: 2 Evenly Flora. Meals: 1 Evenly Digest with your two largest meals.",
+      "image": "k-gut.webp",
+      "color": "#3E9B2F",
+      "short_name": "Gut Reset"
     },
     {
-      "sku": "NN-RESET-BUNDLE",
-      "slug": "the-24-hour-reset",
-      "name": "The 24-Hour Reset",
-      "concerns": ["bundles", "sleep", "bloating-gut"],
-      "price": 109,
-      "includes": ["NN-NOON-DIGEST", "NN-NOON-FLORA", "NN-NIGHT-CALM", "NN-NIGHT-REST"],
+      "sku": "EV-KIT-FULL",
+      "slug": "the-full-reset",
+      "name": "The Full Reset",
+      "concerns": [
+        "bundles",
+        "sleep",
+        "bloating-gut"
+      ],
+      "price": 99,
+      "includes": [
+        "EV-DIGEST",
+        "EV-FLORA",
+        "EV-UNWIND",
+        "EV-SLEEP"
+      ],
       "tagline": "The full day-and-night system for bloating and bad sleep.",
       "short": "Digest + Flora by day, Calm + Deep Rest by night. One routine that works around the clock.*",
-      "description": "<p>Bloating and bad sleep feed each other. A gut that's struggling all day keeps you up at night, and a short night makes your gut worse the next day. The 24-Hour Reset works on both ends of the clock.</p>",
+      "description": "<p>Bloating and bad sleep feed each other. A gut that's struggling all day keeps you up at night, and a short night makes your gut worse the next day. The Full Reset works on both ends of the clock.</p>",
       "benefits": [
         "Daytime: helps relieve occasional gas and bloating*",
         "Nighttime: supports falling and staying asleep*",
-        "Save $22 compared with buying separately"
+        "Save $32 compared with buying separately"
       ],
-      "how_to_use": "Morning: 2 Noon Flora. Meals: 1 Noon Digest. Bedtime: 2 Night Calm + 1 serving Night Deep Rest."
+      "how_to_use": "Morning: 2 Evenly Flora. Meals: 1 Evenly Digest. Bedtime: 2 Evenly Unwind + 1 serving Evenly Sleep.",
+      "image": "k-full.webp",
+      "color": "#0B0B0C",
+      "short_name": "Full Reset"
     }
   ]
 }

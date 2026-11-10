@@ -1,16 +1,16 @@
-# Noon Night for WordPress + WooCommerce
+# Evenly for WordPress + WooCommerce
 
 This folder is the production store: a **WooCommerce theme**, a **functionality plugin**, and a **content seeder**.
 (The Next.js app in the repo root is the earlier prototype on Vercel. It isn't needed for the WordPress store.)
 
 ```
 wordpress/
-├── themes/noon-night/          ← presentation only (PHP templates, CSS, JS)
+├── themes/evenly/          ← presentation only (PHP templates, CSS, JS)
 │   ├── functions.php           ← loads inc/*
 │   ├── inc/                    ← setup, assets, icons, template-tags, woocommerce hooks
 │   ├── template-parts/home/    ← one file per homepage section (reorder in front-page.php)
 │   └── assets/css|js
-├── plugins/noon-night-core/    ← business logic (survives a theme change)
+├── plugins/evenly-core/    ← business logic (survives a theme change)
 │   └── includes/               ← one module per concern: security, compliance, product-fields,
 │                                  concern-fields, bundles, schema, consent, commerce, settings
 ├── setup/
@@ -26,10 +26,10 @@ wordpress/
 
 1. **Back up the site** (your host's backup tool or UpdraftPlus).
 2. Zip and upload:
-   - `plugins/noon-night-core` → Plugins → Add New → Upload → Activate
-   - `themes/noon-night` → Appearance → Themes → Add New → Upload → Activate
+   - `plugins/evenly-core` → Plugins → Add New → Upload → Activate
+   - `themes/evenly` → Appearance → Themes → Add New → Upload → Activate
    (Try it on a **staging copy** first. Most hosts have one-click staging.)
-3. Go to **Settings → Noon Night** and fill in your legal entity, address, support email, GA4 and Meta Pixel IDs.
+3. Go to **Settings → Evenly** and fill in your legal entity, address, support email, GA4 and Meta Pixel IDs.
 4. Upload the `setup` folder to `wp-content/nn-setup/` (SFTP or the host's file manager), then import with WP-CLI (SSH, or your host's WP-CLI console):
    ```bash
    wp eval-file wp-content/nn-setup/seed.php
@@ -51,7 +51,7 @@ If the site already gets organic traffic, **don't change existing URLs**. Keep t
 
 Requires Node 18+. No PHP or Docker needed:
 ```bash
-npx @wp-playground/cli@latest server --port=9400 --mount-dir ./wordpress/themes/noon-night /wordpress/wp-content/themes/noon-night --mount-dir ./wordpress/plugins/noon-night-core /wordpress/wp-content/plugins/noon-night-core --mount-dir ./wordpress/setup /wordpress/nn-setup --blueprint=./wordpress/playground/blueprint.json
+npx @wp-playground/cli@latest server --port=9400 --mount-dir ./wordpress/themes/evenly /wordpress/wp-content/themes/evenly --mount-dir ./wordpress/plugins/evenly-core /wordpress/wp-content/plugins/evenly-core --mount-dir ./wordpress/setup /wordpress/nn-setup --blueprint=./wordpress/playground/blueprint.json
 ```
 Open http://localhost:9400. You're logged in as admin. Edits to theme and plugin files show up on refresh.
 
@@ -59,12 +59,12 @@ Open http://localhost:9400. You're logged in as admin. Edits to theme and plugin
 
 | Want to change | Where |
 |---|---|
-| Product copy, ingredients, warnings, FAQ | Products → Edit → **Noon Night** tab |
+| Product copy, ingredients, warnings, FAQ | Products → Edit → **Evenly** tab |
 | Concern hub headline, SEO article, FAQ | Products → Categories → Edit |
 | Homepage FAQ | Pages → Home → custom field `nn_faq` (Question \| Answer per line) |
-| Homepage section order | `themes/noon-night/front-page.php` |
-| Announcement bar, free-shipping amount, guarantee days | Settings → Noon Night |
-| Colors and fonts | `themes/noon-night/assets/css/main.css` (tokens at the top) |
+| Homepage section order | `themes/evenly/front-page.php` |
+| Announcement bar, free-shipping amount, guarantee days | Settings → Evenly |
+| Colors and fonts | `themes/evenly/assets/css/main.css` (tokens at the top) |
 
 ## Compliance rules for anyone writing copy
 

@@ -19,6 +19,8 @@ export type Concern = {
   headline: string;
   tagline: string;
   content_file: string;
+  image: string;
+  color: string;
 };
 
 export type ConcernPage = Concern & {
@@ -45,6 +47,9 @@ export type Product = {
   warnings?: string;
   faq?: Faq;
   includes?: string[];
+  image: string;
+  color: string;
+  short_name: string;
   isBundle: boolean;
 };
 
@@ -60,7 +65,7 @@ export type ContentDoc = {
   body: string;
 };
 
-export type Business = Record<string, string | number>;
+export type Business = Record<string, string | number | boolean>;
 
 function read(rel: string) {
   return fs.readFileSync(path.join(ROOT, rel), "utf8");
@@ -155,28 +160,33 @@ export function bundleInfo(p: Product) {
   return { items, value, saving: Math.max(0, value - p.price) };
 }
 
+/** Public URL of a theme image (synced to /public/img by scripts/sync-assets.mjs). */
+export const img = (file: string) => `/img/${file}`;
+
 /** Light-weight card data for client components. */
 export function toCard(p: Product) {
   return {
     slug: p.slug,
     sku: p.sku,
     name: p.name,
+    shortName: p.short_name,
     price: p.price,
     tagline: p.tagline,
-    accent: concernColor(p.concerns[0]),
+    image: img(p.image),
+    accent: p.color,
+    isBundle: p.isBundle,
   };
 }
 export type Card = ReturnType<typeof toCard>;
 
 export function concernColor(slug: string) {
-  const map: Record<string, string> = {
-    sleep: "#3B2A5A",
-    "period-comfort": "#C2563A",
-    "bloating-gut": "#4F7A4A",
-    "stress-calm": "#5C6FA8",
-    bundles: "#8A5A83",
-  };
-  return map[slug] ?? "#3B2A5A";
+  return getConcern(slug)?.color ?? "#0B0B0C";
+}
+
+/** The site-wide offer: every 3rd single formula is free (cheapest one). Bundles excluded. */
+export function getOffer() {
+  const b = getBusiness();
+  return { enabled: Boolean(b.offer_enabled), label: String(b.offer_label ?? "Buy 2, get 1 free") };
 }
 
 export const FDA_DISCLAIMER =

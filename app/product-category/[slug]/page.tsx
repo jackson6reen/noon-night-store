@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { concernColor, FDA_DISCLAIMER, getConcern, getConcerns, getProductsInConcern, toCard } from "@/lib/site";
+import { concernColor, FDA_DISCLAIMER, getConcern, getConcerns, getOffer, getProductsInConcern, img, toCard } from "@/lib/site";
 import { ProductGrid } from "@/components/ProductGrid";
 import { Faq } from "@/components/Faq";
 import { Icon } from "@/components/Icon";
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps<"/product-category/
   return c ? { title: { absolute: c.seoTitle }, description: c.description } : {};
 }
 
-/** Concern hub: same layout as the WooCommerce category archive + noon-night-core concern fields. */
+/** Concern hub: same layout as the WooCommerce category archive + evenly-core concern fields. */
 export default async function ConcernPage({ params }: PageProps<"/product-category/[slug]">) {
   const { slug } = await params;
   const c = getConcern(slug);
@@ -29,10 +29,13 @@ export default async function ConcernPage({ params }: PageProps<"/product-catego
     <main id="main" className="nn-main nn-shop">
       <div className="nn-container">
         <nav className="nn-breadcrumb" aria-label="Breadcrumb"><Link href="/">Home</Link><span aria-hidden="true"> / </span>{c.name}</nav>
-        <header className="woocommerce-products-header">
-          <h1 className="woocommerce-products-header__title page-title">{c.headline}</h1>
-          <p className="nn-hub-tagline" style={{ ["--accent" as string]: concernColor(c.slug) }}><Icon name={c.icon} size={20} /> {c.tagline}</p>
-          <div className="term-description"><p>{c.intro}</p></div>
+        <header className="woocommerce-products-header ev-hub-hero">
+          <div>
+            <p className="nn-hub-tagline" style={{ ["--accent" as string]: concernColor(c.slug) }}><Icon name={c.icon} size={20} /> {c.tagline}</p>
+            <h1 className="woocommerce-products-header__title page-title">{c.headline}</h1>
+            <div className="term-description"><p>{c.intro}</p></div>
+          </div>
+          <img src={img(c.image)} alt="" width={960} height={720} fetchPriority="high" />
         </header>
         <nav className="nn-chips" aria-label="Shop by concern">
           <Link href="/shop">All</Link>
@@ -40,7 +43,7 @@ export default async function ConcernPage({ params }: PageProps<"/product-catego
             <Link key={x.slug} href={`/product-category/${x.slug}`} aria-current={x.slug === slug ? "page" : undefined}>{x.name}</Link>
           ))}
         </nav>
-        <ProductGrid products={products} />
+        <ProductGrid products={products} offerLabel={getOffer().enabled ? getOffer().label : undefined} />
         <section className="nn-hub-article" aria-label="Guide">
           <div className="nn-prose" dangerouslySetInnerHTML={{ __html: c.body }} />
           {c.faq.length > 0 && <><h2>Frequently asked questions</h2><Faq items={c.faq} /></>}

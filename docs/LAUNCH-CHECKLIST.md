@@ -9,12 +9,12 @@ Supliful's site lists **Shopify and ClickFunnels** sync. WooCommerce isn't menti
   - b) Supliful through Zapier/Make (Woo "order paid" → create order via their API), if they offer API access, or
   - c) run checkout on Shopify and keep WordPress for content/SEO (the "Buy" button links to Shopify).
 - [ ] Order **samples of every product**. Photograph them (white background + lifestyle) and upload in Products → Edit. Real photos replace the drawn bottles automatically.
-- [ ] Check each product's label against the **Noon Night** tab (doses, counts, warnings) and tick "Label checked". Products marked `label_verified: false` in `products.json` (Night Calm, Night Deep Rest, Noon Steady) need it most.
+- [ ] Check each product's label against the **Evenly** tab (doses, counts, warnings) and tick "Label checked". Products marked `label_verified: false` in `products.json` (Evenly Unwind, Evenly Sleep, Evenly Calm) need it most.
 - [ ] Confirm wholesale cost + shipping per product. Prices are set for about 65% gross margin on a typical $10–13 landed cost. Adjust if needed.
 
 ## 2. Business and legal
 - [ ] Legal entity (LLC) + EIN, and a business bank account connected to Stripe.
-- [ ] **Settings → Noon Night**: legal entity, address, support email (a domain email like support@yourdomain.com), governing state.
+- [ ] **Settings → Evenly**: legal entity, address, support email (a domain email like support@yourdomain.com), governing state.
 - [ ] Have a lawyer review Privacy, Terms and Refund (they're solid templates, not legal advice).
 - [ ] Sales tax: enable WooCommerce Tax (automated) or TaxJar. Register in your home state, and in others as you pass their economic-nexus thresholds.
 - [ ] Product liability insurance (common for supplement sellers, and some suppliers require it).
@@ -38,7 +38,7 @@ Supliful's site lists **Shopify and ClickFunnels** sync. WooCommerce isn't menti
 - [ ] Publish 2–4 new articles a month in the same format (key takeaways → body → product callout → when to see a doctor → sources → FAQ).
 
 ## 5. Tracking
-- [ ] GA4 Measurement ID and Meta Pixel ID in **Settings → Noon Night** (they load only after consent).
+- [ ] GA4 Measurement ID and Meta Pixel ID in **Settings → Evenly** (they load only after consent).
 - [ ] Optional: Meta Conversions API through the official "Meta for WooCommerce" plugin.
 
 ## 6. Final pre-launch pass

@@ -2,21 +2,17 @@
 
 import Link from "next/link";
 import { useCart } from "@/lib/cart";
-import { CartLines, ShippingBar } from "./Cart";
-
-const usd = (n: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
+import { CartSummary } from "./Cart";
 
 export function CartPageView({ freeShipMin }: { freeShipMin: number }) {
-  const { lines, subtotal, ready } = useCart();
+  const { lines, ready } = useCart();
   if (!ready) return null;
   if (!lines.length)
-    return <div className="nn-drawer__empty"><p>Your cart is empty.</p><Link href="/shop" className="nn-btn">Shop all</Link></div>;
+    return <div className="nn-drawer__empty"><p>Your cart is empty.</p><Link href="/shop/" className="nn-btn">Shop all</Link></div>;
   return (
     <div className="nn-store-page">
-      <ShippingBar min={freeShipMin} />
-      <CartLines />
-      <p className="nn-drawer__total" style={{ marginTop: 20 }}><span>Subtotal</span><span>{usd(subtotal)}</span></p>
-      <Link href="/checkout" className="nn-btn nn-btn--lg nn-btn--block">Proceed to checkout</Link>
+      <CartSummary freeShipMin={freeShipMin} />
+      <Link href="/checkout/" className="nn-btn nn-btn--accent nn-btn--lg nn-btn--block" style={{ marginTop: 20 }}>Proceed to checkout</Link>
     </div>
   );
 }

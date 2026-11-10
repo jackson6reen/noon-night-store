@@ -1,4 +1,4 @@
-# Noon Night: EPIC email sequence
+# Evenly: EPIC email sequence
 
 Built from the EPIC Emails template (Engage, Promote, Inspire, Consume). Load these into your email tool (Klaviyo, Mailchimp, or WooCommerce + MailPoet). Sign every email from a real founder name.
 
@@ -20,7 +20,7 @@ Here's your gift: **[The Bloat-Free Plate →]**
 It isn't a throwaway freebie. It's the simple plate layout that takes the "what will this do to my stomach" guesswork out of lunch.
 
 Can't wait to hear what you think,
-{Founder}, Noon Night
+{Founder}, Evenly
 
 ## ENGAGE 2: Check-in (4 days later, if unopened)
 **Subject:** are you ok?
@@ -39,7 +39,7 @@ Is it the bloating, the sleep, or both? Tell me in 30 seconds here: **[survey li
 
 I get it. You want a life where lunch doesn't decide how your afternoon goes, and where sleep comes easily.
 If falling asleep in 20 minutes and waking up before the alarm, rested, sounds good, you really have to see this:
-**[The 24-Hour Reset →]**
+**[The Full Reset →]**
 P.S. That third sentence is worth a second look.
 
 ---
@@ -53,14 +53,14 @@ Where are you right now with your bloating and sleep? Hit reply and tell me.
 ---
 
 ## CONSUME 1: After purchase (day 0)
-**Subject:** You just got the 24-Hour Reset… now what?
+**Subject:** You just got the Full Reset… now what?
 
-I just took your money. That means I owe you something important. So let's make a pact. Tonight, put **Night Calm + Night Deep Rest on your nightstand**, and put **Noon Flora + Noon Digest next to your coffee maker**. Where they live is half the battle. I'll keep showing up in your inbox to help.
+I just took your money. That means I owe you something important. So let's make a pact. Tonight, put **Evenly Unwind + Evenly Sleep on your nightstand**, and put **Evenly Flora + Evenly Digest next to your coffee maker**. Where they live is half the battle. I'll keep showing up in your inbox to help.
 
 ## CONSUME 2: Day 3
 **Subject:** The one-line version of the Reset
 
-If I had to narrow it to one tip: **take Noon Digest with your first bite, not after.** Enzymes work on food as it arrives. That alone is 60–70% of the afternoon difference.
+If I had to narrow it to one tip: **take Evenly Digest with your first bite, not after.** Enzymes work on food as it arrives. That alone is 60–70% of the afternoon difference.
 
 ## CONSUME 3: Day 10
 **Subject:** Want to feel it even faster?

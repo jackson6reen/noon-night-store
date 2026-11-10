@@ -10,11 +10,11 @@
 			"pluginData": { "resource": "wordpress.org/plugins", "slug": "woocommerce" },
 			"options": { "activate": true }
 		},
-		{ "step": "activatePlugin", "pluginPath": "noon-night-core/noon-night-core.php" },
-		{ "step": "activateTheme", "themeFolderName": "noon-night" },
+		{ "step": "activatePlugin", "pluginPath": "evenly-core/evenly-core.php" },
+		{ "step": "activateTheme", "themeFolderName": "evenly" },
 		{
 			"step": "runPHP",
-			"code": "<?php require '/wordpress/wp-load.php'; update_option('woocommerce_coming_soon','no'); update_option('woocommerce_store_pages_only','no'); update_option('woocommerce_onboarding_profile', array('skipped' => true)); define('NN_SEED_FRESH_SITE', true); require '/wordpress/nn-setup/seed.php';"
+			"code": "<?php require '/wordpress/wp-load.php'; update_option('woocommerce_coming_soon','no'); update_option('woocommerce_store_pages_only','no'); update_option('woocommerce_onboarding_profile', array('skipped' => true)); update_option('woocommerce_cod_settings', array('enabled' => 'yes', 'title' => 'Local test payment (Playground only)')); define('NN_SEED_FRESH_SITE', true); require '/wordpress/nn-setup/seed.php';"
 		}
 	]
 }
