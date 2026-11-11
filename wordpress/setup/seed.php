@@ -345,6 +345,7 @@ nn_seed_log( '5/6 Store basics' );
 // Safe defaults that don't change what visitors see on an existing site.
 update_option( 'woocommerce_currency', 'USD' );
 update_option( 'woocommerce_enable_guest_checkout', 'yes' );
+update_option( 'woocommerce_checkout_phone_field', 'required' ); // Supliful declines orders without a phone.
 update_option( 'woocommerce_enable_signup_and_login_from_checkout', 'yes' );
 update_option( 'woocommerce_enable_review_rating', 'yes' );
 update_option( 'woocommerce_review_rating_verification_required', 'yes' ); // Only verified buyers can review (FTC-friendly).

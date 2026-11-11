@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Evenly Core
  * Description:       Store logic for Evenly: supplement product fields, concern hubs, FDA/FTC compliance blocks, SEO schema, privacy consent (CCPA + GPC), and security hardening. Theme-independent by design.
- * Version:           1.1.0
+ * Version:           1.2.0
  * Requires at least: 6.5
  * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'NN_CORE_VERSION', '1.0.0' );
+define( 'NN_CORE_VERSION', '1.2.0' );
 define( 'NN_CORE_FILE', __FILE__ );
 define( 'NN_CORE_DIR', plugin_dir_path( __FILE__ ) );
 define( 'NN_CORE_URL', plugin_dir_url( __FILE__ ) );
@@ -34,6 +34,7 @@ $nn_modules = array(
 	'commerce',     // Free-shipping progress, trust badges under add-to-cart.
 	'offer',        // "Buy 2, get 1 free", Build-your-3 links, cart hand-off from the Vercel preview.
 	'setup-page',   // Tools > Evenly Setup: one-click content import (no WP-CLI needed).
+	'fulfillment-shopify', // WooCommerce > Supliful: paid orders -> headless Shopify -> Supliful; tracking back.
 );
 
 foreach ( $nn_modules as $nn_module ) {

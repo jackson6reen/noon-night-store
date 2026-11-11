@@ -28,7 +28,9 @@ Amounts, counts and directions are hidden and shown as "Pending final label" unt
 - [ ] Lawyer review of the Privacy, Terms and Refund pages
 
 ## Commerce
-- [ ] Supliful (or another supplier) connected to WooCommerce for order forwarding
+- [x] WooCommerce → Supliful order forwarding built (evenly-core 1.2.0: headless Shopify bridge, tracking back via webhook; 23/23 local tests with mocked Shopify)
+- [ ] Shopify store + Supliful Pro + Dev Dashboard app connected and SKUs mapped (WooCommerce > Supliful). Step-by-step: `docs/FIRST-SALE-PLAN.md`
+- [ ] First real order placed by the owner to confirm the full chain (Stripe → Shopify → Supliful → tracking)
 - [ ] Stripe connected in WooCommerce, test order placed with a test card, then switched to live
 - [ ] "Buy 2, get 1 free" confirmed as approved: margin with the lowest-priced formula free is roughly $29–36 gross on a 3-pack before ads
 - [ ] GA4 / Meta Pixel IDs added (events are wired and consent-gated, but no IDs are configured)
