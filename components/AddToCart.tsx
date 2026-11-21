@@ -6,7 +6,9 @@ import { useCart } from "@/lib/cart";
 import { toItem, track } from "@/lib/analytics";
 import type { Card } from "@/lib/site";
 
-type Item = Pick<Card, "slug" | "sku" | "name" | "price" | "accent" | "image" | "isBundle">;
+type Item = Pick<Card, "slug" | "sku" | "name" | "price" | "accent" | "image" | "isBundle"> & { sellable?: boolean };
+
+const COMING_SOON = "Coming soon";
 
 const toLine = (p: Item) => ({ slug: p.slug, sku: p.sku, name: p.name, price: p.price, line: p.accent, image: p.image, isBundle: p.isBundle });
 const usd = (n: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(n);
@@ -14,6 +16,7 @@ const shortName = (name: string) => name.replace(/:.*$/, "");
 
 export function AddToCartButton({ product, className = "", label = "Add to cart" }: { product: Item; className?: string; label?: string }) {
   const { add } = useCart();
+  if (product.sellable === false) return <button type="button" className={className} disabled aria-disabled="true">{COMING_SOON}</button>;
   return (
     <button type="button" className={className} aria-label={`Add ${product.name} to cart`} onClick={() => add(toLine(product))}>
       {label}
@@ -36,6 +39,7 @@ export function AddToCartForm({ product, priceLabel }: { product: Item; priceLab
   }, []);
 
   const submit = () => add(toLine(product), qty);
+  const sellable = product.sellable !== false;
 
   return (
     <>
@@ -44,9 +48,9 @@ export function AddToCartForm({ product, priceLabel }: { product: Item; priceLab
           <label className="screen-reader-text" htmlFor="nn-qty">Quantity</label>
           <input id="nn-qty" type="number" inputMode="numeric" min={1} max={99} value={qty} onChange={(e) => setQty(Math.max(1, Math.min(99, Number(e.target.value) || 1)))} />
         </div>
-        <button ref={btn} type="submit" className="single_add_to_cart_button button alt">Add to cart · {priceLabel}</button>
+        <button ref={btn} type="submit" className="single_add_to_cart_button button alt" disabled={!sellable}>{sellable ? <>Add to cart · {priceLabel}</> : COMING_SOON}</button>
       </form>
-      {sticky && (
+      {sticky && sellable && (
         <div className="nn-sticky-atc">
           <span className="nn-sticky-atc__name">{product.name}</span>
           <span className="nn-sticky-atc__price">{priceLabel}</span>
@@ -69,8 +73,9 @@ export function TrackViewItem({ product }: { product: { sku: string; name: strin
  * "Build your 3": pick any three single formulas, the lowest-priced is free.
  * Same rule as the cart (lib/cart.tsx) and WordPress (evenly-core/includes/offer.php).
  */
-export function BuildYour3({ products, label }: { products: Item[]; label: string }) {
+export function BuildYour3({ products: all, label }: { products: Item[]; label: string }) {
   const { add } = useCart();
+  const products = all.filter((p) => p.sellable !== false);
   const [picked, setPicked] = useState<string[]>([]);
   const chosen = picked.map((s) => products.find((p) => p.slug === s)).filter(Boolean) as Item[];
   const complete = chosen.length === 3;
