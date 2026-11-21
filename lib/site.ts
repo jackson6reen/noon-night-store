@@ -192,6 +192,8 @@ export function toCard(p: Product) {
     isBundle: p.isBundle,
     format: verifiedFormat(p),
     includesCount: p.includes?.length ?? 0,
+    /** Only products whose supplier label is verified can be bought (unverified ones show "Coming soon"). */
+    sellable: labelVerified(p),
   };
 }
 export type Card = ReturnType<typeof toCard>;
