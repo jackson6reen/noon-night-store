@@ -161,10 +161,35 @@ export function CartSummary({ freeShipMin }: { freeShipMin: number }) {
   );
 }
 
-export function CheckoutPanel({ wooBase, freeShipMin, flat }: { wooBase: string | null; freeShipMin: number; flat: number }) {
+export function CheckoutPanel({ shopify = false, wooBase, freeShipMin, flat }: { shopify?: boolean; wooBase: string | null; freeShipMin: number; flat: number }) {
   const { lines, total, ready } = useCart();
   const [ack, setAck] = useState(false);
   const [error, setError] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [payError, setPayError] = useState<string | null>(null);
+
+  async function goToShopify() {
+    if (!ack) return setError(true);
+    setBusy(true);
+    setPayError(null);
+    try {
+      const res = await fetch("/api/checkout/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ items: lines.map((l) => ({ sku: l.sku, qty: l.qty })) }),
+      });
+      const data = (await res.json()) as { url?: string; error?: string; missing?: string[] };
+      if (res.ok && data.url) {
+        window.location.href = data.url;
+        return;
+      }
+      const names = (data.missing ?? []).map((sku) => lines.find((l) => l.sku === sku)?.name ?? sku);
+      setPayError(names.length ? `${data.error} Please remove: ${names.join(", ")}.` : data.error ?? "Checkout is temporarily unavailable.");
+    } catch {
+      setPayError("Checkout is temporarily unavailable. Please try again.");
+    }
+    setBusy(false);
+  }
   const tracked = useRef(false);
 
   useEffect(() => {
@@ -187,13 +212,20 @@ export function CheckoutPanel({ wooBase, freeShipMin, flat }: { wooBase: string 
           I have read the product warnings and the <a href="/medical-disclaimer/" target="_blank">health disclaimer</a>. I will check with my doctor if I am pregnant, nursing, taking medication or have a medical condition.
         </label>
         {error && <p className="nn-form-error" role="alert">Please confirm you have read the product warnings.</p>}
-        {wooBase ? (
+        {shopify ? (
+          <>
+            <button type="button" className="nn-btn nn-btn--lg nn-btn--block" onClick={goToShopify} disabled={busy} aria-busy={busy}>
+              {busy ? "Opening secure checkout…" : "Continue to secure payment"}
+            </button>
+            {payError && <p className="nn-form-error" role="alert">{payError}</p>}
+          </>
+        ) : wooBase ? (
           <button type="button" className="nn-btn nn-btn--lg nn-btn--block" onClick={() => (ack ? (window.location.href = wooCheckoutUrl(wooBase, lines)) : setError(true))}>
             Continue to secure payment
           </button>
         ) : (
           <div className="nn-callout">
-            <p><strong>Preview store.</strong> Payment runs on the WooCommerce site. Set <code>WOOCOMMERCE_URL</code> in Vercel to send this cart there.</p>
+            <p><strong>Checkout opens soon.</strong> Payments are not connected yet. Set <code>SHOPIFY_STORE_DOMAIN</code> and <code>SHOPIFY_STOREFRONT_TOKEN</code> in Vercel to turn them on.</p>
           </div>
         )}
       </aside>

@@ -62,5 +62,7 @@ npm run dev        # http://localhost:3000
 ## Environment variables (Vercel)
 | Name | Effect |
 |---|---|
+| `SHOPIFY_STORE_DOMAIN` | e.g. `evenly-xxxx.myshopify.com`: checkout goes to Shopify (Shopify Payments → Supliful). Products are matched by SKU |
+| `SHOPIFY_STOREFRONT_TOKEN` | Storefront API public access token from Shopify's Headless channel |
 | `WOOCOMMERCE_URL` | e.g. `https://shop.yourdomain.com`: checkout hands the cart to WooCommerce |
 | `SITE_INDEXABLE` | `1` = allow search engines (leave unset for a preview) |
